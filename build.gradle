@@ -21,7 +21,7 @@ repositories {
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.21-R0.1-SNAPSHOT'
-    compileOnly 'com.github.ColinGrime:Midnight:v1.2.0.2'
+    compileOnly 'com.github.ColinGrime:Midnight:v1.2.1'
 
     // Testing:
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'

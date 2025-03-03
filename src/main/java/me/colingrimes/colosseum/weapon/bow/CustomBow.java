@@ -2,7 +2,6 @@ package me.colingrimes.colosseum.weapon.bow;
 
 import me.colingrimes.colosseum.weapon.Weapon;
 import me.colingrimes.midnight.util.bukkit.Items;
-import me.colingrimes.midnight.util.bukkit.NBT;
 import org.bukkit.Material;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
@@ -22,13 +21,13 @@ public interface CustomBow extends Weapon {
 	 */
 	@Nonnull
 	default ItemStack getWeapon() {
-		ItemStack item = Items.of(Material.BOW)
+		return Items.of(Material.BOW)
 				.name(getName())
 				.lore(List.of(getLore()))
 				.hide(true)
-				.glow(true).build();
-		NBT.setTag(item, "custom_bow", getId());
-		return item;
+				.glow(true)
+				.nbt("custom_bow", getId())
+				.build();
 	}
 
 	/**
