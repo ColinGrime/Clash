@@ -1,0 +1,6 @@
+name: Colosseum
+main: me.colingrimes.colosseum.Colosseum
+version: ${version}
+api-version: 1.20
+author: Scill
+depend: [Midnight]
