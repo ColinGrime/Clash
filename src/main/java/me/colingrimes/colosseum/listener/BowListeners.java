@@ -20,7 +20,7 @@ import java.util.Map;
 public class BowListeners implements Listener {
 
 	private final Colosseum plugin;
-	private final Map<Entity, CustomBow> firedArrows = new HashMap<>();
+	private final Map<Arrow, CustomBow> firedArrows = new HashMap<>();
 
 	public BowListeners(@Nonnull Colosseum plugin) {
 		this.plugin = plugin;
@@ -48,24 +48,26 @@ public class BowListeners implements Listener {
 
 	@EventHandler
 	public void onBowFire(final EntityShootBowEvent event) {
-		plugin.findBow(event.getBow()).ifPresent(bow -> {
-			firedArrows.put(event.getProjectile(), bow);
-			bow.activate(event);
-		});
+		if (event.getProjectile() instanceof Arrow arrow) {
+			plugin.findBow(event.getBow()).ifPresent(bow -> {
+				bow.activate(event);
+				firedArrows.put(arrow, bow);
+			});
+		}
 	}
 
 	@EventHandler
 	public void onArrowHit(final ProjectileHitEvent event) {
-		if (event.getEntity() instanceof Arrow && firedArrows.containsKey(event.getEntity())) {
-			firedArrows.get(event.getEntity()).activate(event);
+		if (event.getEntity() instanceof Arrow arrow && firedArrows.containsKey(arrow)) {
+			firedArrows.get(arrow).activate(event);
+			Scheduler.async().runLater(() -> firedArrows.remove(arrow), 5L);
 		}
 	}
 
 	@EventHandler
 	public void onEntityArrowHit(final EntityDamageByEntityEvent event) {
-		if (event.getDamager() instanceof Arrow && firedArrows.containsKey(event.getDamager())) {
-			firedArrows.get(event.getDamager()).activate(event);
-			Scheduler.sync().runLater(() -> firedArrows.remove(event.getEntity()), 5L);
+		if (event.getDamager() instanceof Arrow arrow && firedArrows.containsKey(arrow)) {
+			firedArrows.get(arrow).activate(event);
 		}
 	}
 }
