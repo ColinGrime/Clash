@@ -1,4 +1,10 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
-public class Sniper {
+import me.colingrimes.colosseum.weapon.bow.BaseBow;
+
+public class Sniper extends BaseBow {
+
+	public Sniper() {
+		super("sniper", "Sniper", "Fully charged shots never miss.");
+	}
 }

@@ -1,4 +1,10 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
-public class Ricochet {
+import me.colingrimes.colosseum.weapon.bow.BaseBow;
+
+public class Ricochet extends BaseBow {
+
+	public Ricochet() {
+		super("ricochet", "Ricochet", "Arrows bounce off surfaces.");
+	}
 }

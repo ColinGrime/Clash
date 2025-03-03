@@ -1,4 +1,10 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
-public class Cluster {
+import me.colingrimes.colosseum.weapon.bow.BaseBow;
+
+public class Cluster extends BaseBow {
+
+	public Cluster() {
+		super("cluster", "Cluster", "Fires a cluster of arrows on impact.");
+	}
 }

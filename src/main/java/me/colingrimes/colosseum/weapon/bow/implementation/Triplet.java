@@ -1,4 +1,10 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
-public class Triplet {
+import me.colingrimes.colosseum.weapon.bow.BaseBow;
+
+public class Triplet extends BaseBow {
+
+	public Triplet() {
+		super("triplet", "Triplet", "Shoots three arrows simultaneously.");
+	}
 }

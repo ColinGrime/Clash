@@ -27,7 +27,7 @@ public interface CustomBow extends Weapon {
 				.lore(List.of(getLore()))
 				.hide(true)
 				.glow(true).build();
-		NBT.setTag(item, "custom-bow", getId());
+		NBT.setTag(item, "custom_bow", getId());
 		return item;
 	}
 

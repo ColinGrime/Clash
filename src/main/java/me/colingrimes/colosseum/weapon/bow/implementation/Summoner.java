@@ -1,4 +1,10 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
-public class Summoner {
+import me.colingrimes.colosseum.weapon.bow.BaseBow;
+
+public class Summoner extends BaseBow {
+
+	public Summoner() {
+		super("summoner", "Summoner", "Spawns random passive mobs on hit.");
+	}
 }
