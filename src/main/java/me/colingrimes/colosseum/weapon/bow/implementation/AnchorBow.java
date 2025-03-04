@@ -23,6 +23,21 @@ public class AnchorBow extends BaseBow {
 		this.startAnchors();
 	}
 
+	@Override
+	public void activate(@Nonnull ProjectileHitEvent event) {
+		Location location = null;
+		if (event.getHitBlock() != null) {
+			location = event.getHitBlock().getLocation();
+		} else if (event.getHitEntity() != null) {
+			location = event.getHitEntity().getLocation();
+		}
+
+		if (location != null) {
+			anchors.put((Player) event.getEntity().getShooter(), new AnchorData(location.add(0, 1, 0)));
+			event.getEntity().remove();
+		}
+	}
+
 	private void startAnchors() {
 		Scheduler.sync().runRepeating(() -> {
 			Iterator<Map.Entry<Player, AnchorData>> iterator = anchors.entrySet().iterator();
@@ -44,21 +59,6 @@ public class AnchorBow extends BaseBow {
 				anchor.time += 1;
 			}
 		}, 0L, 10L);
-	}
-
-	@Override
-	public void activate(@Nonnull ProjectileHitEvent event) {
-		Location location = null;
-		if (event.getHitBlock() != null) {
-			location = event.getHitBlock().getLocation();
-		} else if (event.getHitEntity() != null) {
-			location = event.getHitEntity().getLocation();
-		}
-
-		if (location != null) {
-			anchors.put((Player) event.getEntity().getShooter(), new AnchorData(location.add(0, 1, 0)));
-			event.getEntity().remove();
-		}
 	}
 
 	private static class AnchorData {

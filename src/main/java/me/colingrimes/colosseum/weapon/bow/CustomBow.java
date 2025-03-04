@@ -8,6 +8,7 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -21,13 +22,17 @@ public interface CustomBow extends Weapon {
 	 */
 	@Nonnull
 	default ItemStack getWeapon() {
-		return Items.of(Material.BOW)
+		ItemStack item = Items.of(Material.BOW)
 				.name(getName())
 				.lore(List.of(getLore()))
 				.hide(true)
 				.glow(true)
 				.nbt("custom_bow", getId())
 				.build();
+		ItemMeta meta = item.getItemMeta();
+		meta.setUnbreakable(true);
+		item.setItemMeta(meta);
+		return item;
 	}
 
 	/**
