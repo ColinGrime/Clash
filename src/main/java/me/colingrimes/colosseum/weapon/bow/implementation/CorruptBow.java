@@ -7,4 +7,9 @@ public class CorruptBow extends BaseBow {
 	public CorruptBow() {
 		super("corrupt", "&c&lCorrupt", "&7Decay &oeverything&r.");
 	}
+
+	@Override
+	public boolean isEnabled() {
+		return false;
+	}
 }

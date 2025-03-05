@@ -7,4 +7,9 @@ public class QuakeBow extends BaseBow {
 	public QuakeBow() {
 		super("quake", "&b&lQuake", "&7Creates a small shockwave where the arrow lands.");
 	}
+
+	@Override
+	public boolean isEnabled() {
+		return false;
+	}
 }

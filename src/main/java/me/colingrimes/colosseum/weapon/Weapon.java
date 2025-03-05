@@ -37,4 +37,14 @@ public interface Weapon {
 	 */
 	@Nonnull
 	ItemStack getWeapon();
+
+	/**
+	 * Gets whether the custom weapon is enabled.
+	 * Disabled weapons will not be loaded.
+	 *
+	 * @return true if the weapon is enabled
+	 */
+	default boolean isEnabled() {
+		return true;
+	}
 }

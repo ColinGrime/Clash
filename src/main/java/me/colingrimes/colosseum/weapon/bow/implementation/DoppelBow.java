@@ -7,4 +7,9 @@ public class DoppelBow extends BaseBow {
 	public DoppelBow() {
 		super("doppel", "&d&lDoppel", "&7Duplicate yourself.");
 	}
+
+	@Override
+	public boolean isEnabled() {
+		return false;
+	}
 }

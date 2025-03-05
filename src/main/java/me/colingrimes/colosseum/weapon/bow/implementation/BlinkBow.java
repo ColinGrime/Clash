@@ -7,4 +7,9 @@ public class BlinkBow extends BaseBow {
 	public BlinkBow() {
 		super("blink", "&b&lBlink", "&7Teleport to safety!");
 	}
+
+	@Override
+	public boolean isEnabled() {
+		return false;
+	}
 }

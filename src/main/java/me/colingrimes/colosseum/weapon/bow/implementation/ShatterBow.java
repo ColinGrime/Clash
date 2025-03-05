@@ -7,4 +7,9 @@ public class ShatterBow extends BaseBow {
 	public ShatterBow() {
 		super("shatter", "&c&lShatter", "&7Arrows explode on impact!");
 	}
+
+	@Override
+	public boolean isEnabled() {
+		return false;
+	}
 }

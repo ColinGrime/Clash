@@ -7,4 +7,9 @@ public class FluxBow extends BaseBow {
 	public FluxBow() {
 		super("flux", "&d&lFlux", "&7Arrows randomly change trajectory mid-flight.");
 	}
+
+	@Override
+	public boolean isEnabled() {
+		return false;
+	}
 }

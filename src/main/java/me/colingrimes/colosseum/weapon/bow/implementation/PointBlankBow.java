@@ -7,4 +7,9 @@ public class PointBlankBow extends BaseBow {
 	public PointBlankBow() {
 		super("point_blank", "&c&lPoint Blank", "&7Arrows deal significantly more damage at close range.");
 	}
+
+	@Override
+	public boolean isEnabled() {
+		return false;
+	}
 }

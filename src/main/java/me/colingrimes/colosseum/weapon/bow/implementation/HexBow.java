@@ -7,4 +7,9 @@ public class HexBow extends BaseBow {
 	public HexBow() {
 		super("hex", "&d&lHex", "&7Arrows apply a random negative effect on hit.");
 	}
+
+	@Override
+	public boolean isEnabled() {
+		return false;
+	}
 }

@@ -7,4 +7,9 @@ public class PhaseBow extends BaseBow {
 	public PhaseBow() {
 		super("phase", "&d&lPhase", "&7Arrows phase through walls and obstacles.");
 	}
+
+	@Override
+	public boolean isEnabled() {
+		return false;
+	}
 }

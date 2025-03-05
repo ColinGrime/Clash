@@ -7,4 +7,9 @@ public class MagnetBow extends BaseBow {
 	public MagnetBow() {
 		super("magnet", "&a&lMagnet", "&7Pulls nearby enemies toward the impact point.");
 	}
+
+	@Override
+	public boolean isEnabled() {
+		return false;
+	}
 }

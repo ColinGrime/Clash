@@ -7,4 +7,9 @@ public class MimicBow extends BaseBow {
 	public MimicBow() {
 		super("mimic", "&a&lM&b&li&c&lm&d&li&e&lc", "&7Activates a random ability.");
 	}
+
+	@Override
+	public boolean isEnabled() {
+		return false;
+	}
 }

@@ -7,4 +7,9 @@ public class SemtexBow extends BaseBow {
 	public SemtexBow() {
 		super("semtex", "&c&lSemtex", "&7Arrows stick to enemies and explode after a delay.");
 	}
+
+	@Override
+	public boolean isEnabled() {
+		return false;
+	}
 }
