@@ -1,9 +1,9 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
+import me.colingrimes.colosseum.util.Util;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
 import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import me.colingrimes.midnight.scheduler.Scheduler;
-import org.bukkit.Location;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -25,15 +25,10 @@ public class HomingBow extends BaseBow {
 				Arrow arrow = info.world().spawnArrow(info.location(), new Vector(0, 0.3, 0), 1.5f, 0);
 				Scheduler.sync().runLater(() -> {
 					arrow.remove();
-					info.world().spawnArrow(arrow.getLocation(), getDirection(arrow.getLocation(), entity.getLocation()), 2f, 0);
+					info.world().spawnArrow(arrow.getLocation(), Util.getDirection(arrow.getLocation(), entity.getLocation()), 2f, 0);
 				}, 5L);
 				break;
 			}
 		}
-	}
-
-	@Nonnull
-	private Vector getDirection(@Nonnull Location source, @Nonnull Location target) {
-		return target.toVector().subtract(source.toVector()).normalize();
 	}
 }

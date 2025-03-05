@@ -1,7 +1,9 @@
 package me.colingrimes.colosseum.util;
 
 import org.bukkit.Location;
+import org.bukkit.util.Vector;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +29,18 @@ public final class Util {
 			}
 		}
 		return locations;
+	}
+
+	/**
+	 * Gets the direction from the source location to the target location.
+	 *
+	 * @param source the source location
+	 * @param target the target location
+	 * @return the direction to get from the source to target
+	 */
+	@Nonnull
+	public static Vector getDirection(@Nonnull Location source, @Nonnull Location target) {
+		return target.toVector().subtract(source.toVector()).normalize();
 	}
 
 	private Util() {
