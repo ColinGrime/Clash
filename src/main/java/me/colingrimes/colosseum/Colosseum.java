@@ -1,6 +1,6 @@
 package me.colingrimes.colosseum;
 
-import me.colingrimes.colosseum.listener.BowListeners;
+import me.colingrimes.colosseum.weapon.bow.listener.BowListeners;
 import me.colingrimes.colosseum.weapon.bow.CustomBow;
 import me.colingrimes.midnight.Midnight;
 import me.colingrimes.midnight.util.bukkit.NBT;
@@ -32,7 +32,7 @@ public class Colosseum extends Midnight {
 
 	@Nonnull
 	public List<CustomBow> getBows() {
-		return bows;
+		return new ArrayList<>(bows);
 	}
 
 	@Nonnull
@@ -43,7 +43,7 @@ public class Colosseum extends Midnight {
 
 	@Nonnull
 	public Optional<CustomBow> findBow(@Nonnull String id) {
-		return bows.stream().filter(bow -> bow.getId().equals(id)).findFirst();
+		return bows.stream().filter(bow -> bow.getId().equalsIgnoreCase(id)).findFirst();
 	}
 
 	/**
