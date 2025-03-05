@@ -1,6 +1,7 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
+import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
@@ -13,12 +14,12 @@ public class RiderBow extends BaseBow {
 	}
 
 	@Override
-	public void activate(@Nonnull EntityShootBowEvent event) {
-		event.getProjectile().addPassenger(event.getEntity());
+	public void activate(@Nonnull EntityShootBowEvent event, @Nonnull BowEventInfo info) {
+		info.arrow().addPassenger(info.shooter());
 	}
 
 	@Override
-	public void activate(@Nonnull ProjectileHitEvent event) {
-		event.getEntity().remove();
+	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowEventInfo info) {
+		info.arrow().remove();
 	}
 }

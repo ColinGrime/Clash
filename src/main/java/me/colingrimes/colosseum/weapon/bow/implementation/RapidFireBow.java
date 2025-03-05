@@ -1,6 +1,7 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
+import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import org.bukkit.entity.Arrow;
 import org.bukkit.event.player.PlayerInteractEvent;
 
@@ -13,7 +14,7 @@ public class RapidFireBow extends BaseBow {
 	}
 
 	@Override
-	public void activate(@Nonnull PlayerInteractEvent event) {
-		event.getPlayer().launchProjectile(Arrow.class, event.getPlayer().getLocation().getDirection());
+	public void activate(@Nonnull PlayerInteractEvent event, @Nonnull BowEventInfo info) {
+		info.shooter().launchProjectile(Arrow.class, info.shooter().getLocation().getDirection());
 	}
 }

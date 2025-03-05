@@ -1,6 +1,7 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
+import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import org.bukkit.Location;
 import org.bukkit.entity.Arrow;
 import org.bukkit.event.entity.EntityShootBowEvent;
@@ -15,24 +16,24 @@ public class TripletBow extends BaseBow {
 	}
 
 	@Override
-	public void activate(@Nonnull EntityShootBowEvent event) {
-		fireArrow(event, 3);
-		fireArrow(event, -3);
+	public void activate(@Nonnull EntityShootBowEvent event, @Nonnull BowEventInfo info) {
+		fireArrow(info, 3);
+		fireArrow(info, -3);
 	}
 
 	/**
 	 * Sets the new yaw and launches the additional arrow.
 	 *
-	 * @param event the event
+	 * @param info the bow event info
 	 * @param yaw the new yaw value
 	 */
-	private void fireArrow(@Nonnull EntityShootBowEvent event, int yaw) {
-		Location arrowLocation = event.getEntity().getLocation().clone();
+	private void fireArrow(@Nonnull BowEventInfo info, int yaw) {
+		Location arrowLocation = info.location();
 		arrowLocation.setYaw(arrowLocation.getYaw() + yaw);
 
 		Vector velocity = arrowLocation.getDirection();
-		double speed = event.getProjectile().getVelocity().length();
+		double speed = info.arrow().getVelocity().length();
 
-		event.getEntity().launchProjectile(Arrow.class, velocity.multiply(speed));
+		info.shooter().launchProjectile(Arrow.class, velocity.multiply(speed));
 	}
 }

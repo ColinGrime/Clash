@@ -1,12 +1,12 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
+import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import me.colingrimes.midnight.scheduler.Scheduler;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
 import javax.annotation.Nonnull;
@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class AnchorBow extends BaseBow {
 
-	private final Map<Player, AnchorData> anchors = new HashMap<>();
+	private final Map<LivingEntity, AnchorData> anchors = new HashMap<>();
 
 	public AnchorBow() {
 		super("anchor", "&c&lAnchor", "&7Pin enemies to the groud.");
@@ -24,7 +24,7 @@ public class AnchorBow extends BaseBow {
 	}
 
 	@Override
-	public void activate(@Nonnull ProjectileHitEvent event) {
+	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowEventInfo info) {
 		Location location = null;
 		if (event.getHitBlock() != null) {
 			location = event.getHitBlock().getLocation();
@@ -33,14 +33,14 @@ public class AnchorBow extends BaseBow {
 		}
 
 		if (location != null) {
-			anchors.put((Player) event.getEntity().getShooter(), new AnchorData(location.add(0, 1, 0)));
-			event.getEntity().remove();
+			anchors.put(info.shooter(), new AnchorData(location.add(0, 1, 0)));
+			info.arrow().remove();
 		}
 	}
 
 	private void startAnchors() {
 		Scheduler.sync().runRepeating(() -> {
-			Iterator<Map.Entry<Player, AnchorData>> iterator = anchors.entrySet().iterator();
+			Iterator<Map.Entry<LivingEntity, AnchorData>> iterator = anchors.entrySet().iterator();
 			while (iterator.hasNext()) {
 				AnchorData anchor = iterator.next().getValue();
 				if (anchor.time > 10) {

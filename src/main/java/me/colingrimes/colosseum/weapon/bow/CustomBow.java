@@ -7,6 +7,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerPickupArrowEvent;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -31,6 +33,7 @@ public interface CustomBow extends Weapon {
 				.build();
 		ItemMeta meta = item.getItemMeta();
 		meta.setUnbreakable(true);
+		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
 		item.setItemMeta(meta);
 		return item;
 	}
@@ -39,17 +42,17 @@ public interface CustomBow extends Weapon {
 	 * Used to activate interaction abilities.
 	 *
 	 * @param event the player interact event
+	 * @param info the bow event info
 	 */
-	default void activate(@Nonnull PlayerInteractEvent event) {}
+	default void activate(@Nonnull PlayerInteractEvent event, @Nonnull BowEventInfo info) {}
 
 	/**
 	 * Used to activate abilities on regular bow shot.
-	 * <p>
-	 * This method is only called on player bow shot
 	 *
 	 * @param event the player shoot bow event
+	 * @param info the bow event info
 	 */
-	default void activate(@Nonnull EntityShootBowEvent event) {}
+	default void activate(@Nonnull EntityShootBowEvent event, @Nonnull BowEventInfo info) {}
 
 	/**
 	 * Used to activate abilities when an arrow lands.
@@ -58,8 +61,9 @@ public interface CustomBow extends Weapon {
 	 * {@code EntityShootBowEvent} event.
 	 *
 	 * @param event the arrow hit event
+	 * @param info the bow event info
 	 */
-	default void activate(@Nonnull ProjectileHitEvent event) {}
+	default void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowEventInfo info) {}
 
 	/**
 	 * Used to activate abilities when an arrow damages an entity.
@@ -68,6 +72,15 @@ public interface CustomBow extends Weapon {
 	 * {@code EntityShootBowEvent} event.
 	 *
 	 * @param event the arrow damage event
+	 * @param info the bow event info
 	 */
-	default void activate(@Nonnull EntityDamageByEntityEvent event) {}
+	default void activate(@Nonnull EntityDamageByEntityEvent event, @Nonnull BowEventInfo info) {}
+
+	/**
+	 * Used to handle custom arrow pickup events.
+	 *
+	 * @param event the arrow pickup event
+	 * @param info the bow event info
+	 */
+	default void activate(@Nonnull PlayerPickupArrowEvent event, @Nonnull BowEventInfo info) {}
 }

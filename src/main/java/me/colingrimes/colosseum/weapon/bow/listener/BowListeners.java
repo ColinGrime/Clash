@@ -1,21 +1,26 @@
-package me.colingrimes.colosseum.listener;
+package me.colingrimes.colosseum.weapon.bow.listener;
 
 import me.colingrimes.colosseum.Colosseum;
+import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import me.colingrimes.colosseum.weapon.bow.CustomBow;
 import me.colingrimes.midnight.scheduler.Scheduler;
 import me.colingrimes.midnight.util.io.Logger;
+import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerPickupArrowEvent;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class BowListeners implements Listener {
 
@@ -42,32 +47,43 @@ public class BowListeners implements Listener {
 	}
 
 	@EventHandler
-	public void onBowInteract(final PlayerInteractEvent event) {
-		plugin.findBow(event.getItem()).ifPresent(b -> b.activate(event));
+	public void onPlayerInteract(@Nonnull PlayerInteractEvent event) {
+		plugin.findBow(event.getItem()).ifPresent(b -> b.activate(event, new BowEventInfo(event.getPlayer())));
 	}
 
 	@EventHandler
-	public void onBowFire(final EntityShootBowEvent event) {
+	public void onEntityShootBow(@Nonnull EntityShootBowEvent event) {
 		if (event.getProjectile() instanceof Arrow arrow) {
 			plugin.findBow(event.getBow()).ifPresent(bow -> {
-				bow.activate(event);
+				arrow.setPickupStatus(AbstractArrow.PickupStatus.ALLOWED);
+				bow.activate(event, new BowEventInfo(event.getEntity(), arrow));
 				firedArrows.put(arrow, bow);
 			});
 		}
 	}
 
 	@EventHandler
-	public void onArrowHit(final ProjectileHitEvent event) {
+	public void onProjectileHit(@Nonnull ProjectileHitEvent event) {
 		if (event.getEntity() instanceof Arrow arrow && firedArrows.containsKey(arrow)) {
-			firedArrows.get(arrow).activate(event);
-			Scheduler.async().runLater(() -> firedArrows.remove(arrow), 5L);
+			LivingEntity entity = (LivingEntity) event.getEntity().getShooter();
+			firedArrows.get(arrow).activate(event, new BowEventInfo(Objects.requireNonNull(entity), arrow));
 		}
 	}
 
 	@EventHandler
-	public void onEntityArrowHit(final EntityDamageByEntityEvent event) {
+	public void onEntityDamageByEntity(@Nonnull EntityDamageByEntityEvent event) {
 		if (event.getDamager() instanceof Arrow arrow && firedArrows.containsKey(arrow)) {
-			firedArrows.get(arrow).activate(event);
+			LivingEntity entity = (LivingEntity) arrow.getShooter();
+			firedArrows.get(arrow).activate(event, new BowEventInfo(Objects.requireNonNull(entity), arrow, event.getEntity()));
+		}
+	}
+
+	@EventHandler
+	public void onPlayerPickupArrow(@Nonnull PlayerPickupArrowEvent event) {
+		Arrow arrow = (Arrow) event.getArrow();
+		if (firedArrows.containsKey(arrow)) {
+			LivingEntity entity = (LivingEntity) arrow.getShooter();
+			firedArrows.get(arrow).activate(event, new BowEventInfo(Objects.requireNonNull(entity), arrow));
 		}
 	}
 }

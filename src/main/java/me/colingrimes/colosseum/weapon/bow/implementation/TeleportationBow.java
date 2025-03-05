@@ -1,7 +1,7 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
-import org.bukkit.entity.Player;
+import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
 import javax.annotation.Nonnull;
@@ -13,8 +13,7 @@ public class TeleportationBow extends BaseBow {
 	}
 
 	@Override
-	public void activate(@Nonnull ProjectileHitEvent event) {
-		Player player = (Player) event.getEntity().getShooter();
-		player.teleport(event.getEntity().getLocation().setDirection(player.getLocation().getDirection()));
+	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowEventInfo info) {
+		info.shooter().teleport(info.location().setDirection(info.shooter().getLocation().getDirection()));
 	}
 }

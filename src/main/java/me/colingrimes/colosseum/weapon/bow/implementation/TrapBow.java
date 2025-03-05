@@ -3,6 +3,7 @@ package me.colingrimes.colosseum.weapon.bow.implementation;
 import me.colingrimes.colosseum.model.OldBlock;
 import me.colingrimes.colosseum.util.Util;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
+import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import me.colingrimes.midnight.scheduler.Scheduler;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -20,10 +21,10 @@ public class TrapBow extends BaseBow {
 	}
 
 	@Override
-	public void activate(@Nonnull EntityDamageByEntityEvent event) {
+	public void activate(@Nonnull EntityDamageByEntityEvent event, @Nonnull BowEventInfo info) {
 		event.setCancelled(true);
 
-		Location location = event.getEntity().getLocation();
+		Location location = info.location();
 		List<Location> trapLocations = Util.getLocationsBetween(location.clone().add(2, 2, 2), location.clone().add(-1, 0, -1));
 		List<OldBlock> oldBlocks = new ArrayList<>();
 

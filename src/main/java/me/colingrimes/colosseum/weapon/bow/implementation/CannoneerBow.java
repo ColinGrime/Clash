@@ -1,6 +1,7 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
+import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
@@ -13,9 +14,9 @@ public class CannoneerBow extends BaseBow {
 	}
 
 	@Override
-	public void activate(@Nonnull ProjectileHitEvent event) {
+	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowEventInfo info) {
 		for (int i=0; i<3; i++) {
-			event.getEntity().getWorld().spawnEntity(event.getEntity().getLocation(), EntityType.TNT);
+			info.world().spawnEntity(info.location(), EntityType.TNT);
 		}
 	}
 }

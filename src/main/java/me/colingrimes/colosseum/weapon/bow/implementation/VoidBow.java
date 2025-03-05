@@ -3,10 +3,10 @@ package me.colingrimes.colosseum.weapon.bow.implementation;
 import me.colingrimes.colosseum.model.OldBlock;
 import me.colingrimes.colosseum.util.Util;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
+import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import me.colingrimes.midnight.scheduler.Scheduler;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -28,13 +28,12 @@ public class VoidBow extends BaseBow {
 	}
 
 	@Override
-	public void activate(@Nonnull ProjectileHitEvent event) {
-		Location location = event.getEntity().getLocation();
-		World world = location.getWorld();
-		for (Entity entity : world.getNearbyEntities(location, 2, 2, 2)) {
+	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowEventInfo info) {
+		Location location = info.location();
+		for (Entity entity : info.world().getNearbyEntities(location, 2, 2, 2)) {
 			if (entity instanceof LivingEntity) {
 				BoundingBox box = entity.getBoundingBox();
-				location = new Location(world, box.getCenterX() - 1, entity.getLocation().getY(), box.getCenterZ() - 1);
+				location = new Location(info.world(), box.getCenterX() - 1, entity.getLocation().getY(), box.getCenterZ() - 1);
 				break;
 			}
 		}
@@ -52,7 +51,7 @@ public class VoidBow extends BaseBow {
 	}
 
 	@Override
-	public void activate(@Nonnull EntityDamageByEntityEvent event) {
+	public void activate(@Nonnull EntityDamageByEntityEvent event, @Nonnull BowEventInfo info) {
 		event.setCancelled(true);
 	}
 
