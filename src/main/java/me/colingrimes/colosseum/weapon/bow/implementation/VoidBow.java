@@ -9,7 +9,6 @@ import me.colingrimes.midnight.util.bukkit.Locations;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -21,22 +20,19 @@ import java.util.stream.Collectors;
 
 public class VoidBow extends BaseBow {
 
-	private final Map<Queue<Block>, Stack<OldBlock>> voidBlocks = new HashMap<>();
-
 	public VoidBow() {
 		super("void", "&c&lVoid", "&7Good bye.");
-		this.startVoidAbility();
 	}
 
 	@Override
 	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowEventInfo info) {
+		info.arrow().remove();
+
 		Location location = info.location();
-		for (Entity entity : Entities.nearby(location, 2)) {
-			if (entity instanceof LivingEntity) {
-				BoundingBox box = entity.getBoundingBox();
-				location = new Location(info.world(), box.getCenterX() - 1, entity.getLocation().getY(), box.getCenterZ() - 1);
-				break;
-			}
+		Optional<LivingEntity> entity = Entities.find(LivingEntity.class, location, 2);
+		if (entity.isPresent()) {
+			BoundingBox box = entity.get().getBoundingBox();
+			location = new Location(info.world(), box.getCenterX() - 1, entity.get().getLocation().getY(), box.getCenterZ() - 1);
 		}
 
 		Location bottomLocation = location.clone().add(2, 0, 2);
@@ -45,35 +41,28 @@ public class VoidBow extends BaseBow {
 		Queue<Block> voidBlocks = Locations.between(location, bottomLocation)
 				.stream()
 				.map(Location::getBlock)
-				.filter(block -> block.getType() != Material.AIR).collect(Collectors.toCollection(LinkedList::new));
-		if (!voidBlocks.isEmpty()) {
-			this.voidBlocks.put(voidBlocks, new Stack<>());
-		}
+				.filter(block -> block.getType() != Material.AIR)
+				.collect(Collectors.toCollection(LinkedList::new));
+		Stack<OldBlock> oldBlocks = new Stack<>();
+
+		Scheduler.sync().runRepeating((task) -> {
+			for (int i=0; i<12; i++) {
+				if (!voidBlocks.isEmpty()) {
+					Block block = voidBlocks.poll();
+					oldBlocks.push(new OldBlock(block));
+					block.setType(Material.AIR);
+				} else if (!oldBlocks.isEmpty()) {
+					oldBlocks.pop().revert();
+				} else {
+					task.stop();
+					return;
+				}
+			}
+		}, 0L, 5L);
 	}
 
 	@Override
 	public void activate(@Nonnull EntityDamageByEntityEvent event, @Nonnull BowEventInfo info) {
 		event.setCancelled(true);
-	}
-
-	private void startVoidAbility() {
-		Scheduler.sync().runRepeating(() -> {
-			var iterator = voidBlocks.entrySet().iterator();
-			while (iterator.hasNext()) {
-				var voidBlock = iterator.next();
-				for (int i=0; i<12; i++) {
-					if (!voidBlock.getKey().isEmpty()) {
-						Block block = voidBlock.getKey().poll();
-						voidBlock.getValue().push(new OldBlock(block));
-						block.setType(Material.AIR);
-					} else if (!voidBlock.getValue().isEmpty())
-						voidBlock.getValue().pop().revert();
-					else {
-						iterator.remove();
-						break;
-					}
-				}
-			}
-		}, 0L, 5L);
 	}
 }

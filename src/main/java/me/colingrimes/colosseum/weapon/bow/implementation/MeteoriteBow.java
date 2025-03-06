@@ -18,11 +18,9 @@ import java.util.List;
 public class MeteoriteBow extends BaseBow {
 
 	private final Material[] materials = {Material.BLACKSTONE, Material.BASALT, Material.CRYING_OBSIDIAN, Material.OBSIDIAN};
-	private final List<Meteorite> meteorites = new ArrayList<>();
 
 	public MeteoriteBow() {
 		super("meteorite", "&c&lMeteorite Missile", "&7Rain destruction.");
-		this.startMeteoriteAbility();
 	}
 
 	@Override
@@ -53,27 +51,22 @@ public class MeteoriteBow extends BaseBow {
 			Location meteorLocation = location.clone().add(0, 50, 0).add(offsetX, offsetY, offsetZ);
 			Material meteorMaterial = Random.item(materials);
 			FallingBlock fallingBlock = location.getWorld().spawnFallingBlock(meteorLocation, meteorMaterial.createBlockData());
+			fallingBlock.setDropItem(false);
 			fallingBlock.setHurtEntities(true);
 			fallingBlocks.add(fallingBlock);
 		}
-		meteorites.add(new Meteorite(location, fallingBlocks));
-	}
 
-	private void startMeteoriteAbility() {
-		Scheduler.sync().runRepeating(() -> {
-			var meteoriteIterator = meteorites.iterator();
-			while (meteoriteIterator.hasNext()) {
-				Meteorite meteorite = meteoriteIterator.next();
-				Location location = meteorite.location;
-				for (FallingBlock block : meteorite.fallingBlocks) {
-					if (location.getY() > block.getLocation().getY()) {
-						location.getWorld().createExplosion(location, 20F, true);
-						scatterGroundBlocks(location, 5);
-						meteoriteIterator.remove();
-						break;
-					}
+		Scheduler.sync().runRepeating((task) -> {
+			for (FallingBlock block : fallingBlocks) {
+				if (block.getLocation().getY() > location.getY()) {
 					block.getWorld().spawnParticle(Particle.EXPLOSION, block.getLocation(), 1, 0, 0, 0, 0.1F);
+					continue;
 				}
+
+				location.getWorld().createExplosion(location, 20F, true);
+				scatterGroundBlocks(location, 5);
+				task.stop();
+				return;
 			}
 		}, 0L, 1L);
 	}
@@ -98,15 +91,5 @@ public class MeteoriteBow extends BaseBow {
 		double y = Math.random() * 1.5 + 0.5;
 		double z = (Math.random() - 0.5) * 2;
 		debris.setVelocity(new Vector(x, y, z));
-	}
-
-	private static class Meteorite {
-		private final Location location;
-		private final List<FallingBlock> fallingBlocks;
-
-		public Meteorite(@Nonnull Location location, @Nonnull List<FallingBlock> fallingBlocks) {
-			this.location = location;
-			this.fallingBlocks = fallingBlocks;
-		}
 	}
 }

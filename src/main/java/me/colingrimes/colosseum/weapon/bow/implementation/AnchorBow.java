@@ -11,67 +11,35 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
 import javax.annotation.Nonnull;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 public class AnchorBow extends BaseBow {
 
-	private final Map<LivingEntity, AnchorData> anchors = new HashMap<>();
-
 	public AnchorBow() {
 		super("anchor", "&c&lAnchor", "&7Pin enemies to the groud.");
-		this.startAnchors();
 	}
 
 	@Override
 	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowEventInfo info) {
-		Location location = null;
+		Location location;
 		if (event.getHitBlock() != null) {
 			location = event.getHitBlock().getLocation();
 		} else if (event.getHitEntity() != null) {
 			location = event.getHitEntity().getLocation();
+		} else {
+			return;
 		}
 
-		// Start spawning the anchors.
-		if (location != null) {
-			anchors.put(info.shooter(), new AnchorData(location.add(0, 1, 0)));
-			info.arrow().remove();
-		}
-	}
+		info.arrow().remove();
+		Location anchorLocation = location.clone().add(0, 1, 0);
 
-	/**
-	 * Starts the anchor spawning interval.
-	 */
-	private void startAnchors() {
 		Scheduler.sync().runRepeating(() -> {
-			Iterator<Map.Entry<LivingEntity, AnchorData>> iterator = anchors.entrySet().iterator();
-			while (iterator.hasNext()) {
-				AnchorData anchor = iterator.next().getValue();
-				if (anchor.time > 10) {
-					iterator.remove();
-					continue;
+			Entities.spawn(anchorLocation, EntityType.EVOKER_FANGS);
+			for (Entity entity : Entities.nearby(anchorLocation, 3)) {
+				if (entity instanceof LivingEntity livingEntity) {
+					livingEntity.teleport(anchorLocation.setDirection(livingEntity.getLocation().getDirection()));
+					livingEntity.damage(1);
 				}
-
-				for (Entity entity : Entities.nearby(anchor.location, 3)) {
-					if (entity instanceof LivingEntity livingEntity) {
-						livingEntity.teleport(anchor.location.setDirection(livingEntity.getLocation().getDirection()));
-						livingEntity.damage(1);
-					}
-				}
-
-				Entities.spawn(anchor.location, EntityType.EVOKER_FANGS);
-				anchor.time += 1;
 			}
-		}, 0L, 10L);
-	}
-
-	private static class AnchorData {
-		private final Location location;
-		private int time = 0;
-
-		public AnchorData(@Nonnull Location location) {
-			this.location = location;
-		}
+		}, 0L, 10L, 5 * 20L);
 	}
 }

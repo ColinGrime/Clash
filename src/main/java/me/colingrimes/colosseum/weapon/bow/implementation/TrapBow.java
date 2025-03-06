@@ -28,26 +28,21 @@ public class TrapBow extends BaseBow {
 		List<Location> trapLocations = Locations.between(location.clone().add(2, 2, 2), location.clone().add(-1, 0, -1));
 		List<OldBlock> oldBlocks = new ArrayList<>();
 
-		trapLocations.stream()
-				.filter(trapLocation -> trapLocation.getBlock().getType() == Material.AIR
-						&& !(trapLocation.getBlockX() == location.getBlockX()
-						&& trapLocation.getBlockY() == location.getBlockY()
-						&& trapLocation.getBlockZ() == location.getBlockZ()))
-				.forEach(trapLocation -> {
-					Block block = trapLocation.getBlock();
-					oldBlocks.add(new OldBlock(block));
-
-					if (trapLocation.getBlockY() == location.getBlockY() + 1) {
-						block.setType(Material.OBSIDIAN);
-					} else {
-						block.setType(Material.GLASS);
-					}
-				});
-
-		Scheduler.sync().runLater(() -> {
-			for (OldBlock oldBlock : oldBlocks) {
-				oldBlock.revert();
+		for (Location trapLocation : trapLocations) {
+			if (trapLocation.getBlock().getType() != Material.AIR || Locations.equal(trapLocation, location)) {
+				continue;
 			}
-		}, 5 * 20L);
+
+			Block block = trapLocation.getBlock();
+			oldBlocks.add(new OldBlock(block));
+
+			if (trapLocation.getBlockY() == location.getBlockY() + 1) {
+				block.setType(Material.OBSIDIAN);
+			} else {
+				block.setType(Material.GLASS);
+			}
+		}
+
+		Scheduler.sync().runLater(() -> oldBlocks.forEach(OldBlock::revert), 5 * 20L);
 	}
 }

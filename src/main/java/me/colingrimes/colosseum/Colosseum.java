@@ -11,7 +11,6 @@ import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -51,17 +50,8 @@ public class Colosseum extends Midnight {
 	 */
 	private void registerBows() {
 		List<Class<?>> classes = Introspector.getClasses(getClassLoader(), getRootPackage() + ".weapon.bow.implementation");
-		for (Class<?> clazz : classes) {
-			try {
-				CustomBow bow = (CustomBow) clazz.getConstructor().newInstance();
-				if (bow.isEnabled()) {
-					bows.add(bow);
-				}
-			} catch (InstantiationException | InvocationTargetException | IllegalAccessException |
-					 NoSuchMethodException e) {
-				throw new RuntimeException(e);
-			}
-		}
+		List<CustomBow> bows = Introspector.instantiateClasses(classes, CustomBow.class);
+		this.bows.addAll(bows.stream().filter(CustomBow::isEnabled).toList());
 		Logger.log("Registered " + bows.size() + " bows.");
 	}
 }
