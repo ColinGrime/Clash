@@ -31,7 +31,7 @@ public class Colosseum extends Midnight {
 
 	@Nonnull
 	public List<CustomBow> getBows() {
-		return new ArrayList<>(bows);
+		return bows;
 	}
 
 	@Nonnull

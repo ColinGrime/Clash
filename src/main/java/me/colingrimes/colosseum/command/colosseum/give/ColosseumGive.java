@@ -7,11 +7,11 @@ import me.colingrimes.midnight.command.handler.util.ArgumentList;
 import me.colingrimes.midnight.command.handler.util.CommandProperties;
 import me.colingrimes.midnight.command.handler.util.Sender;
 import me.colingrimes.midnight.util.bukkit.Players;
+import me.colingrimes.midnight.util.misc.Random;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,12 +30,9 @@ public class ColosseumGive implements Command<Colosseum> {
 		Player player = optPlayer.get();
 		if (args.get(1).equalsIgnoreCase("random")) {
 			int bowAmount = args.getIntOrDefault(2, 1);
-			List<CustomBow> bows = plugin.getBows();
-			Collections.shuffle(bows);
-			bows.subList(0, bowAmount).forEach(b -> player.getInventory().addItem(b.getWeapon()));
+			Random.items(plugin.getBows(), bowAmount).forEach(b -> player.getInventory().addItem(b.getWeapon()));
 		} else {
-			Optional<CustomBow> bow = plugin.findBow(args.get(1));
-			bow.ifPresent(b -> player.getInventory().addItem(b.getWeapon()));
+			plugin.findBow(args.get(1)).ifPresent(b -> player.getInventory().addItem(b.getWeapon()));
 		}
 	}
 
