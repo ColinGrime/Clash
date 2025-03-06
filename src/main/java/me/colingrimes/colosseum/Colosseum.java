@@ -53,7 +53,10 @@ public class Colosseum extends Midnight {
 		List<Class<?>> classes = Introspector.getClasses(getClassLoader(), getRootPackage() + ".weapon.bow.implementation");
 		for (Class<?> clazz : classes) {
 			try {
-				bows.add((CustomBow) clazz.getConstructor().newInstance());
+				CustomBow bow = (CustomBow) clazz.getConstructor().newInstance();
+				if (bow.isEnabled()) {
+					bows.add(bow);
+				}
 			} catch (InstantiationException | InvocationTargetException | IllegalAccessException |
 					 NoSuchMethodException e) {
 				throw new RuntimeException(e);

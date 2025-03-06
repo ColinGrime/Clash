@@ -1,11 +1,11 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
-import me.colingrimes.colosseum.util.Util;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
 import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import me.colingrimes.midnight.cache.Cooldown;
 import me.colingrimes.midnight.plugin.MidnightPlugin;
 import me.colingrimes.midnight.util.Common;
+import me.colingrimes.midnight.util.bukkit.Locations;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -27,7 +27,7 @@ public class GrappleBow extends BaseBow implements Listener {
 
 	@Override
 	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowEventInfo info) {
-		Vector direction = Util.getDirection(info.shooter().getLocation(), info.location());
+		Vector direction = Locations.direction(info.shooter().getLocation(), info.location());
 		double speed = Math.abs(info.arrow().getVelocity().length()) * 2.5;
 
 		Vector launchVelocity = direction.multiply(speed);

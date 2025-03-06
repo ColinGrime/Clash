@@ -1,10 +1,10 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
-import me.colingrimes.colosseum.util.Util;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
 import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import me.colingrimes.midnight.scheduler.Scheduler;
 import me.colingrimes.midnight.scheduler.task.Task;
+import me.colingrimes.midnight.util.bukkit.Locations;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.Entity;
@@ -23,7 +23,7 @@ public class HealerBow extends BaseBow {
 
 	@Override
 	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowEventInfo info) {
-		List<Location> locations = Util.getLocationsBetween(info.location().add(2,0,2), info.location().add(-1,0,-1));
+		List<Location> locations = Locations.between(info.location().add(2,0,2), info.location().add(-1,0,-1));
 		Task task = Scheduler.sync().runRepeating(() -> {
 			locations.forEach(loc -> info.world().spawnParticle(Particle.HEART, loc, 1));
 

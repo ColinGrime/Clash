@@ -3,6 +3,7 @@ package me.colingrimes.colosseum.weapon.bow.implementation;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
 import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import me.colingrimes.midnight.scheduler.Scheduler;
+import me.colingrimes.midnight.util.bukkit.Entities;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -32,12 +33,16 @@ public class AnchorBow extends BaseBow {
 			location = event.getHitEntity().getLocation();
 		}
 
+		// Start spawning the anchors.
 		if (location != null) {
 			anchors.put(info.shooter(), new AnchorData(location.add(0, 1, 0)));
 			info.arrow().remove();
 		}
 	}
 
+	/**
+	 * Starts the anchor spawning interval.
+	 */
 	private void startAnchors() {
 		Scheduler.sync().runRepeating(() -> {
 			Iterator<Map.Entry<LivingEntity, AnchorData>> iterator = anchors.entrySet().iterator();
@@ -48,14 +53,14 @@ public class AnchorBow extends BaseBow {
 					continue;
 				}
 
-				for (Entity entity : anchor.location.getWorld().getNearbyEntities(anchor.location, 3, 3, 3)) {
+				for (Entity entity : Entities.nearby(anchor.location, 3)) {
 					if (entity instanceof LivingEntity livingEntity) {
 						livingEntity.teleport(anchor.location.setDirection(livingEntity.getLocation().getDirection()));
 						livingEntity.damage(1);
 					}
 				}
 
-				anchor.location.getWorld().spawnEntity(anchor.location, EntityType.EVOKER_FANGS);
+				Entities.spawn(anchor.location, EntityType.EVOKER_FANGS);
 				anchor.time += 1;
 			}
 		}, 0L, 10L);

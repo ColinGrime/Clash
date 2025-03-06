@@ -1,10 +1,11 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
 import me.colingrimes.colosseum.model.OldBlock;
-import me.colingrimes.colosseum.util.Util;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
 import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import me.colingrimes.midnight.scheduler.Scheduler;
+import me.colingrimes.midnight.util.bukkit.Entities;
+import me.colingrimes.midnight.util.bukkit.Locations;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -30,7 +31,7 @@ public class VoidBow extends BaseBow {
 	@Override
 	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowEventInfo info) {
 		Location location = info.location();
-		for (Entity entity : info.world().getNearbyEntities(location, 2, 2, 2)) {
+		for (Entity entity : Entities.nearby(location, 2)) {
 			if (entity instanceof LivingEntity) {
 				BoundingBox box = entity.getBoundingBox();
 				location = new Location(info.world(), box.getCenterX() - 1, entity.getLocation().getY(), box.getCenterZ() - 1);
@@ -41,7 +42,7 @@ public class VoidBow extends BaseBow {
 		Location bottomLocation = location.clone().add(2, 0, 2);
 		bottomLocation.setY(0);
 
-		Queue<Block> voidBlocks = Util.getLocationsBetween(location, bottomLocation)
+		Queue<Block> voidBlocks = Locations.between(location, bottomLocation)
 				.stream()
 				.map(Location::getBlock)
 				.filter(block -> block.getType() != Material.AIR).collect(Collectors.toCollection(LinkedList::new));

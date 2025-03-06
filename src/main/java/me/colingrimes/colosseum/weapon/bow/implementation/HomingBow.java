@@ -1,9 +1,10 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
-import me.colingrimes.colosseum.util.Util;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
 import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import me.colingrimes.midnight.scheduler.Scheduler;
+import me.colingrimes.midnight.util.bukkit.Entities;
+import me.colingrimes.midnight.util.bukkit.Locations;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -20,12 +21,12 @@ public class HomingBow extends BaseBow {
 
 	@Override
 	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowEventInfo info) {
-		for (Entity entity : info.world().getNearbyEntities(info.location(), 10, 10, 10)) {
+		for (Entity entity : Entities.nearby(info.location(), 10)) {
 			if (entity instanceof LivingEntity && !entity.equals(event.getEntity().getShooter())) {
 				Arrow arrow = info.world().spawnArrow(info.location(), new Vector(0, 0.3, 0), 1.5f, 0);
 				Scheduler.sync().runLater(() -> {
 					arrow.remove();
-					info.world().spawnArrow(arrow.getLocation(), Util.getDirection(arrow.getLocation(), entity.getLocation()), 2f, 0);
+					info.world().spawnArrow(arrow.getLocation(), Locations.direction(arrow.getLocation(), entity.getLocation()), 2f, 0);
 				}, 5L);
 				break;
 			}

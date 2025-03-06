@@ -28,8 +28,7 @@ public class SummonerBow extends BaseBow {
 	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowEventInfo info) {
 		int animals = Random.number(2, 4);
 		for (int i=0; i<animals; i++) {
-			EntityType animal = RANDOM_ANIMALS[Random.number(RANDOM_ANIMALS.length)];
-			info.world().spawnEntity(info.location(), animal);
+			info.world().spawnEntity(info.location(), Random.item(RANDOM_ANIMALS));
 		}
 	}
 }
