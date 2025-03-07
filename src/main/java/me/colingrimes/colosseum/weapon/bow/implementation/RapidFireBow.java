@@ -1,5 +1,6 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
+import me.colingrimes.colosseum.Colosseum;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
 import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import org.bukkit.entity.Arrow;
@@ -9,7 +10,7 @@ import javax.annotation.Nonnull;
 
 public class RapidFireBow extends BaseBow {
 
-	public RapidFireBow() {
+	public RapidFireBow(@Nonnull Colosseum plugin) {
 		super("rapid_fire", "&c&lRapid Fire", "&7BRRRRRRRRRRR!!");
 	}
 

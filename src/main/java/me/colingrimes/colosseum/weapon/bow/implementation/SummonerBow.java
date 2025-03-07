@@ -1,5 +1,6 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
+import me.colingrimes.colosseum.Colosseum;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
 import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import me.colingrimes.midnight.util.bukkit.Entities;
@@ -21,7 +22,7 @@ public class SummonerBow extends BaseBow {
 			EntityType.LLAMA
 	};
 
-	public SummonerBow() {
+	public SummonerBow(@Nonnull Colosseum plugin) {
 		super("summoner", "&a&lSummoner", "&7Spawns random passive mobs on hit.");
 	}
 

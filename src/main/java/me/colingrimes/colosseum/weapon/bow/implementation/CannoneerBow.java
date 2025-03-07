@@ -1,5 +1,6 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
+import me.colingrimes.colosseum.Colosseum;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
 import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import me.colingrimes.midnight.util.bukkit.Entities;
@@ -10,7 +11,7 @@ import javax.annotation.Nonnull;
 
 public class CannoneerBow extends BaseBow {
 
-	public CannoneerBow() {
+	public CannoneerBow(@Nonnull Colosseum plugin) {
 		super("cannoneer", "&c&lCannoneer", "&7T-N-T");
 	}
 

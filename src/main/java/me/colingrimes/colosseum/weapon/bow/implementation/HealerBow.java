@@ -1,5 +1,6 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
+import me.colingrimes.colosseum.Colosseum;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
 import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import me.colingrimes.midnight.scheduler.Scheduler;
@@ -17,7 +18,7 @@ import java.util.List;
 
 public class HealerBow extends BaseBow {
 
-	public HealerBow() {
+	public HealerBow(@Nonnull Colosseum plugin) {
 		super("healer", "&d&lHealer", "&7Heals yourself where the arrow lands.");
 	}
 

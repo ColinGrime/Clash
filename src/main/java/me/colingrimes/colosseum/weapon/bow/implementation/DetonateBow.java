@@ -1,5 +1,6 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
+import me.colingrimes.colosseum.Colosseum;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
 import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import me.colingrimes.midnight.display.Display;
@@ -24,7 +25,7 @@ public class DetonateBow extends BaseBow implements Listener {
 	private final Map<Player, DetonateData> arrows = new HashMap<>();
 	private final Team team;
 
-	public DetonateBow() {
+	public DetonateBow(@Nonnull Colosseum plugin) {
 		super("detonate", "&c&lDetonate", "&7Fire an arrow -> Left Click to explode!");
 		Scoreboard scoreboard = Objects.requireNonNull(Bukkit.getScoreboardManager()).getMainScoreboard();
 		Team team = scoreboard.getTeam("arrowMines");

@@ -1,5 +1,6 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
+import me.colingrimes.colosseum.Colosseum;
 import me.colingrimes.colosseum.model.OldBlock;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
 import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
 
 public class VoidBow extends BaseBow {
 
-	public VoidBow() {
+	public VoidBow(@Nonnull Colosseum plugin) {
 		super("void", "&c&lVoid", "&7Good bye.");
 	}
 

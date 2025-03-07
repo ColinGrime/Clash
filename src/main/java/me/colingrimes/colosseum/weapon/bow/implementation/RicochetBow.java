@@ -1,5 +1,6 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
+import me.colingrimes.colosseum.Colosseum;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
 import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import me.colingrimes.midnight.plugin.MidnightPlugin;
@@ -21,9 +22,9 @@ public class RicochetBow extends BaseBow implements Listener {
 
 	private final Map<Arrow, Integer> ricochetArrows = new HashMap<>();
 
-	public RicochetBow() {
+	public RicochetBow(@Nonnull Colosseum plugin) {
 		super("ricochet", "&e&lRicochet", "&7Arrows bounce off surfaces.");
-		Common.register(MidnightPlugin.get(), this);
+		Common.register(plugin, this);
 	}
 
 	@Override

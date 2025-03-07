@@ -1,5 +1,6 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
+import me.colingrimes.colosseum.Colosseum;
 import me.colingrimes.colosseum.model.OldBlock;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
 import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class TrapBow extends BaseBow {
 
-	public TrapBow() {
+	public TrapBow(@Nonnull Colosseum plugin) {
 		super("trap", "&a&lTrap", "&7Trap your enemies.");
 	}
 

@@ -50,7 +50,7 @@ public class Colosseum extends Midnight {
 	 */
 	private void registerBows() {
 		List<Class<?>> classes = Introspector.getClasses(getClassLoader(), getRootPackage() + ".weapon.bow.implementation");
-		List<CustomBow> bows = Introspector.instantiateClasses(classes, CustomBow.class);
+		List<CustomBow> bows = Introspector.instantiateClasses(classes, CustomBow.class, this);
 		this.bows.addAll(bows.stream().filter(CustomBow::isEnabled).toList());
 		Logger.log("Registered " + bows.size() + " bows.");
 	}

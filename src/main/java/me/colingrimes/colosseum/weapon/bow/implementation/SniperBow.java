@@ -1,5 +1,6 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
+import me.colingrimes.colosseum.Colosseum;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
 import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import org.bukkit.Location;
@@ -19,7 +20,7 @@ public class SniperBow extends BaseBow {
 
 	private final Set<UUID> players = new HashSet<>();
 
-	public SniperBow() {
+	public SniperBow(@Nonnull Colosseum plugin) {
 		super("sniper", "&c&lSniper", "&7Fully charged shots never miss.");
 	}
 

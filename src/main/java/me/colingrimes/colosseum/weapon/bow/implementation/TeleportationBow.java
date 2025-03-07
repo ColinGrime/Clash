@@ -1,5 +1,6 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
+import me.colingrimes.colosseum.Colosseum;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
 import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -8,7 +9,7 @@ import javax.annotation.Nonnull;
 
 public class TeleportationBow extends BaseBow {
 
-	public TeleportationBow() {
+	public TeleportationBow(@Nonnull Colosseum plugin) {
 		super("teleportation", "&e&lTeleportation", "&7Teleport to your arrow’s landing spot.");
 	}
 

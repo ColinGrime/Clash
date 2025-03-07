@@ -1,5 +1,6 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
+import me.colingrimes.colosseum.Colosseum;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
 import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import org.bukkit.event.entity.EntityShootBowEvent;
@@ -9,7 +10,7 @@ import javax.annotation.Nonnull;
 
 public class RiderBow extends BaseBow {
 
-	public RiderBow() {
+	public RiderBow(@Nonnull Colosseum plugin) {
 		super("rider", "&e&lRider", "&7Ride your arrow through the air!");
 	}
 

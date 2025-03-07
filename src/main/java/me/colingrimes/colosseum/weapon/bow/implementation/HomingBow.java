@@ -1,5 +1,6 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
+import me.colingrimes.colosseum.Colosseum;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
 import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import me.colingrimes.midnight.scheduler.Scheduler;
@@ -15,7 +16,7 @@ import javax.annotation.Nonnull;
 
 public class HomingBow extends BaseBow {
 
-	public HomingBow() {
+	public HomingBow(@Nonnull Colosseum plugin) {
 		super("homing", "&a&lHoming", "&7Landing an arrow on the ground fires a second homing arrow.");
 	}
 

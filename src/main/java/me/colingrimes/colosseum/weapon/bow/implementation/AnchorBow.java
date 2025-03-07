@@ -1,5 +1,6 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
+import me.colingrimes.colosseum.Colosseum;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
 import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import me.colingrimes.midnight.scheduler.Scheduler;
@@ -11,9 +12,10 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 
 import javax.annotation.Nonnull;
 
+// TODO - add border support
 public class AnchorBow extends BaseBow {
 
-	public AnchorBow() {
+	public AnchorBow(@Nonnull Colosseum plugin) {
 		super("anchor", "&c&lAnchor", "&7Pin enemies to the groud.");
 	}
 

@@ -1,5 +1,6 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
+import me.colingrimes.colosseum.Colosseum;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
 import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import me.colingrimes.midnight.cache.Cooldown;
@@ -20,7 +21,7 @@ public class GrappleBow extends BaseBow implements Listener {
 
 	private final Cooldown<UUID> noFallDamage = Cooldown.create(Duration.ofSeconds(5));
 
-	public GrappleBow() {
+	public GrappleBow(@Nonnull Colosseum plugin) {
 		super("grapple", "&e&lGrapple", "&7Pulls you toward where the arrow lands.");
 		Common.register(MidnightPlugin.get(), this);
 	}

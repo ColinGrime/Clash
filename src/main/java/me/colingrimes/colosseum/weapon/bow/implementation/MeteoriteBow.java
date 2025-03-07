@@ -1,5 +1,6 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
+import me.colingrimes.colosseum.Colosseum;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
 import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import me.colingrimes.midnight.scheduler.Scheduler;
@@ -19,7 +20,7 @@ public class MeteoriteBow extends BaseBow {
 
 	private final Material[] materials = {Material.BLACKSTONE, Material.BASALT, Material.CRYING_OBSIDIAN, Material.OBSIDIAN};
 
-	public MeteoriteBow() {
+	public MeteoriteBow(@Nonnull Colosseum plugin) {
 		super("meteorite", "&c&lMeteorite Missile", "&7Rain destruction.");
 	}
 

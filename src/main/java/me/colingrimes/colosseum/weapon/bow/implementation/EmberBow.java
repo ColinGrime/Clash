@@ -1,5 +1,6 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
+import me.colingrimes.colosseum.Colosseum;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
 import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import me.colingrimes.midnight.scheduler.Scheduler;
@@ -19,7 +20,7 @@ public class EmberBow extends BaseBow {
 
 	private final Material[] materials = { Material.FIRE_CORAL, Material.FIRE_CORAL_FAN, Material.NETHER_WART };
 
-	public EmberBow() {
+	public EmberBow(@Nonnull Colosseum plugin) {
 		super("ember", "&c&lEmber", "&7Set the world ablaze.");
 	}
 
