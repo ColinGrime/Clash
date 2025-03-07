@@ -1,5 +1,6 @@
 package me.colingrimes.colosseum.weapon.bow.implementation;
 
+import me.colingrimes.colosseum.Colosseum;
 import me.colingrimes.colosseum.weapon.bow.BaseBow;
 import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import org.bukkit.Location;
@@ -11,7 +12,7 @@ import javax.annotation.Nonnull;
 
 public class TripletBow extends BaseBow {
 
-	public TripletBow() {
+	public TripletBow(@Nonnull Colosseum plugin) {
 		super("triplet", "&b&lTriplet", "&7Shoots three arrows simultaneously!");
 	}
 
@@ -28,10 +29,10 @@ public class TripletBow extends BaseBow {
 	 * @param yaw the new yaw value
 	 */
 	private void fireArrow(@Nonnull BowEventInfo info, int yaw) {
-		Location arrowLocation = info.location();
-		arrowLocation.setYaw(arrowLocation.getYaw() + yaw);
+		Location location = info.shooter().getLocation();
+		location.setYaw(location.getYaw() + yaw);
 
-		Vector velocity = arrowLocation.getDirection();
+		Vector velocity = location.getDirection();
 		double speed = info.arrow().getVelocity().length();
 
 		info.shooter().launchProjectile(Arrow.class, velocity.multiply(speed));
