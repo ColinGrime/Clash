@@ -5,7 +5,6 @@ import me.colingrimes.colosseum.weapon.bow.BowEventInfo;
 import me.colingrimes.midnight.scheduler.Scheduler;
 import me.colingrimes.midnight.util.bukkit.Entities;
 import org.bukkit.Location;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -33,12 +32,10 @@ public class AnchorBow extends BaseBow {
 		Location anchorLocation = location.clone().add(0, 1, 0);
 
 		Scheduler.sync().runRepeating(() -> {
-			Entities.spawn(anchorLocation, EntityType.EVOKER_FANGS);
-			for (Entity entity : Entities.nearby(anchorLocation, 3)) {
-				if (entity instanceof LivingEntity livingEntity) {
-					livingEntity.teleport(anchorLocation.setDirection(livingEntity.getLocation().getDirection()));
-					livingEntity.damage(1);
-				}
+			Entities.spawn(EntityType.EVOKER_FANGS, anchorLocation);
+			for (LivingEntity entity : Entities.nearby(LivingEntity.class, anchorLocation, 3)) {
+				entity.teleport(anchorLocation.setDirection(entity.getLocation().getDirection()));
+				entity.damage(1);
 			}
 		}, 0L, 10L, 5 * 20L);
 	}

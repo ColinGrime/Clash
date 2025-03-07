@@ -17,7 +17,7 @@ public class CannoneerBow extends BaseBow {
 	@Override
 	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowEventInfo info) {
 		for (int i=0; i<3; i++) {
-			Entities.spawn(info.location(), EntityType.TNT);
+			Entities.spawn(EntityType.TNT, info.location());
 		}
 	}
 }
