@@ -9,7 +9,7 @@ java {
     targetCompatibility JavaVersion.VERSION_17
 }
 
-group 'me.colingrimes.colosseum'
+group 'me.colingrimes.primoria'
 version '1.0.0-alpha'
 
 repositories {
@@ -21,7 +21,8 @@ repositories {
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.21-R0.1-SNAPSHOT'
-    compileOnly 'com.github.ColinGrime:Midnight:v1.2.1'
+//    compileOnly 'com.github.ColinGrime:Midnight:v1.2.1'
+    implementation files('/Users/scill/Desktop/Coding/Plugins/Midnight/plugins/Midnight-1.2.1.jar')
 
     // Testing:
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
