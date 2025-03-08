@@ -15,7 +15,7 @@ import org.bukkit.util.Vector;
 import javax.annotation.Nonnull;
 import java.util.UUID;
 
-// TODO - think about adding cases for leaves/water
+// TODO - think about adding cases for leaves/water/snow
 public class EmberBow extends BaseBow {
 
 	private final Material[] materials = { Material.FIRE_CORAL, Material.FIRE_CORAL_FAN, Material.NETHER_WART };

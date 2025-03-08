@@ -1,14 +1,15 @@
-package me.colingrimes.primoria.command.primoria;
+package me.colingrimes.primoria.command.primoria.weapon;
 
 import me.colingrimes.midnight.command.Command;
 import me.colingrimes.midnight.command.handler.util.CommandProperties;
+import me.colingrimes.primoria.Primoria;
 
 import javax.annotation.Nonnull;
 
-public class Primoria implements Command<me.colingrimes.primoria.Primoria> {
+public class PrimoriaWeapon implements Command<Primoria> {
 
 	@Override
 	public void configureProperties(@Nonnull CommandProperties properties) {
-		properties.setAliases("prim", "pr");
+		properties.setAliases("weapons", "w");
 	}
 }
