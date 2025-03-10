@@ -1,6 +1,5 @@
-package me.colingrimes.primoria.command.primoria.weapon.give;
+package me.colingrimes.primoria.command.primoria.gear.give;
 
-import me.colingrimes.midnight.util.Common;
 import me.colingrimes.primoria.Primoria;
 import me.colingrimes.primoria.gear.bow.BowGear;
 import me.colingrimes.midnight.command.Command;
@@ -16,7 +15,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class WeaponGive implements Command<Primoria> {
+public class GearGive implements Command<Primoria> {
 
 	@Override
 	public void execute(@Nonnull Primoria plugin, @Nonnull Sender sender, @Nonnull ArgumentList args) {

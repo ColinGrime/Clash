@@ -1,4 +1,4 @@
-package me.colingrimes.primoria.command.primoria.weapon.list;
+package me.colingrimes.primoria.command.primoria.gear.list;
 
 import me.colingrimes.primoria.Primoria;
 import me.colingrimes.primoria.gear.bow.BowGear;

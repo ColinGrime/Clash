@@ -1,4 +1,4 @@
-package me.colingrimes.primoria.command.primoria.weapon.show;
+package me.colingrimes.primoria.command.primoria.gear.show;
 
 import me.colingrimes.midnight.menu.Gui;
 import me.colingrimes.primoria.Primoria;
@@ -9,13 +9,13 @@ import org.bukkit.event.inventory.ClickType;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class WeaponGui extends Gui {
+public class GearGui extends Gui {
 
 	private final Primoria plugin;
 	private final Player player;
 
-	public WeaponGui(@Nonnull Primoria plugin, @Nonnull Player player) {
-		super(player, "Weapons", (int) Math.ceil(plugin.getBows().size() / 9.0));
+	public GearGui(@Nonnull Primoria plugin, @Nonnull Player player) {
+		super(player, "Gear", (int) Math.ceil(plugin.getBows().size() / 9.0));
 		this.plugin = plugin;
 		this.player = player;
 	}

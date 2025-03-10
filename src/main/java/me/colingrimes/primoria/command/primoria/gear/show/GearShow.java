@@ -1,4 +1,4 @@
-package me.colingrimes.primoria.command.primoria.weapon.show;
+package me.colingrimes.primoria.command.primoria.gear.show;
 
 import me.colingrimes.midnight.command.Command;
 import me.colingrimes.midnight.command.handler.util.ArgumentList;
@@ -8,11 +8,11 @@ import me.colingrimes.primoria.Primoria;
 
 import javax.annotation.Nonnull;
 
-public class WeaponShow implements Command<Primoria> {
+public class GearShow implements Command<Primoria> {
 
 	@Override
 	public void execute(@Nonnull Primoria plugin, @Nonnull Sender sender, @Nonnull ArgumentList args) {
-		new WeaponGui(plugin, sender.player()).open();
+		new GearGui(plugin, sender.player()).open();
 	}
 
 	@Override
