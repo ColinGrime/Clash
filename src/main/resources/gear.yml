@@ -1,0 +1,113 @@
+# Bow-related Gear
+bows:
+  anchor:
+    name: "Anchor"
+    desc: "Pin enemies to the groud."
+  blink:
+    name: "Blink"
+    desc: "Teleport to safety!"
+  bunker:
+    name: "Bunker"
+    desc: "Activate the barrier!"
+  burrow:
+    name: "Burrow"
+    desc: "Burrow the ground."
+  cannoneer:
+    name: "Cannoneer"
+    desc: "T-N-T"
+  chain:
+    name: "Chain"
+    desc: "Chain enemy hits."
+  cluster:
+    name: "Cluster"
+    desc: "Fire a cluster on impact!"
+  corrupt:
+    name: "Corrupt"
+    desc: "Decay &oeverything&r."
+  detonate:
+    name: "Detonate"
+    desc: "Fire an arrow -> Left Click to explode!"
+  displace:
+    name: "Displace"
+    desc: "Arrows swap positions with &oany &rentity on hit."
+  disruptor:
+    name: "Disruptor"
+    desc: "Completely disable an enemy weapon."
+  doppel:
+    name: "Doppel"
+    desc: "Duplicate yourself."
+  ember:
+    name: "Ember"
+    desc: "Set the world ablaze."
+  flux:
+    name: "Flux"
+    desc: "Arrows randomly change trajectory mid-flight."
+  grapple:
+    name: "Grapple"
+    desc: "Pulls you toward where the arrow lands."
+  healer:
+    name: "Healer"
+    desc: "Heals yourself where the arrow lands."
+  hex:
+    name: "Hex"
+    desc: "Arrows apply a random negative effect on hit."
+  homing:
+    name: "Homing"
+    desc: "Landing an arrow on the ground fires a second homing arrow."
+  magnet:
+    name: "Magnet"
+    desc: "Pulls nearby enemies toward the impact point."
+  meteorite:
+    name: "Meteorite"
+    desc: "Rain destruction."
+  mimic:
+    name: "Mimic"
+    desc: "Activates a random ability."
+  phase:
+    name: "Phase"
+    desc: "Arrows phase through walls and obstacles."
+  point_blank:
+    name: "Point Blank"
+    desc: "Arrows deal significantly more damage at close range."
+  quake:
+    name: "Quake"
+    desc: "Creates a small shockwave where the arrow lands."
+  rapid_fire:
+    name: "Rapid Fire"
+    desc: "BRRRRRRRRRRR!!"
+  repulsor:
+    name: "Repulsor"
+    desc: "Create a shockwave that blasts enemies away."
+  ricochet:
+    name: "Ricochet"
+    desc: "Arrows bounce off surfaces."
+  rider:
+    name: "Rider"
+    desc: "Ride your arrow through the air!"
+  semtex:
+    name: "Semtex"
+    desc: "&7Arrows stick to enemies and explode after a delay."
+  shatter:
+    name: "Shatter"
+    desc: "Arrows explode on impact!"
+  sniper:
+    name: "Sniper"
+    desc: "Fully charged shots never miss."
+  sonar:
+    name: "Sonar"
+    desc: "Arrows send out a sonar wave, revealing hidden players."
+  summoner:
+    name: "Summoner"
+    desc: "Spawns random passive mobs on hit."
+  teleportation:
+    name: "Teleportation"
+    desc: "Teleport to your arrow’s landing spot."
+  trap:
+    name: "Trap"
+    desc: "Trap your enemies."
+  triplet:
+    name: "Triplet"
+    desc: "Shoots three arrows simultaneously!"
+  void:
+    name: "Void"
+    desc: "Good bye."

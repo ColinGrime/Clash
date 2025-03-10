@@ -1,7 +1,7 @@
 package me.colingrimes.primoria;
 
-import me.colingrimes.primoria.weapon.bow.listener.BowListeners;
-import me.colingrimes.primoria.weapon.bow.CustomBow;
+import me.colingrimes.primoria.gear.bow.listener.BowListeners;
+import me.colingrimes.primoria.gear.bow.BowGear;
 import me.colingrimes.midnight.Midnight;
 import me.colingrimes.midnight.util.bukkit.NBT;
 import me.colingrimes.midnight.util.io.Introspector;
@@ -17,7 +17,7 @@ import java.util.Optional;
 
 public class Primoria extends Midnight {
 
-	private final List<CustomBow> bows = new ArrayList<>();
+	private final List<BowGear> bows = new ArrayList<>();
 
 	@Override
 	protected void enable() {
@@ -30,18 +30,18 @@ public class Primoria extends Midnight {
 	}
 
 	@Nonnull
-	public List<CustomBow> getBows() {
+	public List<BowGear> getBows() {
 		return bows;
 	}
 
 	@Nonnull
-	public Optional<CustomBow> findBow(@Nullable ItemStack item) {
-		Optional<String> tag = NBT.getTag(item, "custom_bow");
+	public Optional<BowGear> findBow(@Nullable ItemStack item) {
+		Optional<String> tag = NBT.getTag(item, "gear_bow");
 		return tag.flatMap(id -> bows.stream().filter(bow -> bow.getId().equals(id)).findFirst());
 	}
 
 	@Nonnull
-	public Optional<CustomBow> findBow(@Nonnull String id) {
+	public Optional<BowGear> findBow(@Nonnull String id) {
 		return bows.stream().filter(bow -> bow.getId().equalsIgnoreCase(id)).findFirst();
 	}
 
@@ -49,9 +49,9 @@ public class Primoria extends Midnight {
 	 * Registers all the custom bows.
 	 */
 	private void registerBows() {
-		List<Class<?>> classes = Introspector.getClasses(getClassLoader(), getRootPackage() + ".weapon.bow.implementation");
-		List<CustomBow> bows = Introspector.instantiateClasses(classes, CustomBow.class, this);
-		this.bows.addAll(bows.stream().filter(CustomBow::isEnabled).toList());
+		List<Class<?>> classes = Introspector.getClasses(getClassLoader(), getRootPackage() + ".gear.bow.implementation");
+		List<BowGear> bows = Introspector.instantiateClasses(classes, BowGear.class, this);
+		this.bows.addAll(bows.stream().filter(BowGear::isEnabled).toList());
 		Logger.log("Registered " + bows.size() + " bows.");
 	}
 }

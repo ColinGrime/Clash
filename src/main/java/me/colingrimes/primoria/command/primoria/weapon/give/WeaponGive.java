@@ -1,7 +1,8 @@
 package me.colingrimes.primoria.command.primoria.weapon.give;
 
+import me.colingrimes.midnight.util.Common;
 import me.colingrimes.primoria.Primoria;
-import me.colingrimes.primoria.weapon.bow.CustomBow;
+import me.colingrimes.primoria.gear.bow.BowGear;
 import me.colingrimes.midnight.command.Command;
 import me.colingrimes.midnight.command.handler.util.ArgumentList;
 import me.colingrimes.midnight.command.handler.util.CommandProperties;
@@ -30,9 +31,9 @@ public class WeaponGive implements Command<Primoria> {
 		Player player = optPlayer.get();
 		if (args.get(1).equalsIgnoreCase("random")) {
 			int bowAmount = args.getIntOrDefault(2, 1);
-			Random.items(plugin.getBows(), bowAmount).forEach(b -> player.getInventory().addItem(b.getWeapon()));
+			Random.items(plugin.getBows(), bowAmount).forEach(b -> player.getInventory().addItem(b.getGear()));
 		} else {
-			plugin.findBow(args.get(1)).ifPresent(b -> player.getInventory().addItem(b.getWeapon()));
+			plugin.findBow(args.get(1)).ifPresent(b -> player.getInventory().addItem(b.getGear()));
 		}
 	}
 
@@ -42,7 +43,7 @@ public class WeaponGive implements Command<Primoria> {
 		if (args.size() == 1) {
 			return Players.mapList(Player::getName);
 		} else if (args.size() == 2) {
-			return plugin.getBows().stream().map(CustomBow::getId).toList();
+			return plugin.getBows().stream().map(BowGear::getId).toList();
 		} else {
 			return null;
 		}

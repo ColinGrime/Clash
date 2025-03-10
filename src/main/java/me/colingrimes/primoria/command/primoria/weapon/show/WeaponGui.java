@@ -2,7 +2,7 @@ package me.colingrimes.primoria.command.primoria.weapon.show;
 
 import me.colingrimes.midnight.menu.Gui;
 import me.colingrimes.primoria.Primoria;
-import me.colingrimes.primoria.weapon.bow.CustomBow;
+import me.colingrimes.primoria.gear.bow.BowGear;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 
@@ -22,10 +22,10 @@ public class WeaponGui extends Gui {
 
 	@Override
 	public void draw() {
-		List<CustomBow> bows = plugin.getBows();
+		List<BowGear> bows = plugin.getBows();
 		for (int i=0; i<bows.size(); i++) {
-			CustomBow bow = bows.get(i);
-			getSlot(i).setItem(bow.getWeapon()).bind(ClickType.LEFT, __ -> player.getInventory().addItem(bow.getWeapon()));
+			BowGear bow = bows.get(i);
+			getSlot(i).setItem(bow.getGear()).bind(ClickType.LEFT, __ -> player.getInventory().addItem(bow.getGear()));
 		}
 	}
 }
