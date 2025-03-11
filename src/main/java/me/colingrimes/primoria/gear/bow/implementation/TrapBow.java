@@ -3,6 +3,7 @@ package me.colingrimes.primoria.gear.bow.implementation;
 import me.colingrimes.midnight.message.Message;
 import me.colingrimes.primoria.Primoria;
 import me.colingrimes.primoria.config.GearSettings;
+import me.colingrimes.primoria.gear.GearGrade;
 import me.colingrimes.primoria.gear.bow.BowGear;
 import me.colingrimes.primoria.model.OldBlock;
 import me.colingrimes.primoria.gear.bow.BowInfo;
@@ -33,6 +34,12 @@ public class TrapBow extends BowGear {
 	@Override
 	public Message<?> getDescription() {
 		return GearSettings.BOW_TRAP_DESC;
+	}
+
+	@Nonnull
+	@Override
+	public GearGrade getGrade() {
+		return GearGrade.A;
 	}
 
 	@Override

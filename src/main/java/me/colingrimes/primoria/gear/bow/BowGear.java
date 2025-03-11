@@ -32,8 +32,8 @@ public abstract class BowGear implements Gear {
 	@Nonnull
 	public ItemStack getGear() {
 		return Items.of(Material.BOW)
-				.name("&a&l" + getName().toText())
-				.lore(new String[]{ "&7" + getDescription().toText() })
+				.name(getGrade().getColor() + getName().toText())
+				.lore(new String[]{ "&7" + getDescription().toText(), "", "&7Grade: " + getGrade().getName() })
 				.hide()
 				.glow()
 				.unbreakable()

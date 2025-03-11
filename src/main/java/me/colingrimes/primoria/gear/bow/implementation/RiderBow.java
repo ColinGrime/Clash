@@ -3,6 +3,7 @@ package me.colingrimes.primoria.gear.bow.implementation;
 import me.colingrimes.midnight.message.Message;
 import me.colingrimes.primoria.Primoria;
 import me.colingrimes.primoria.config.GearSettings;
+import me.colingrimes.primoria.gear.GearGrade;
 import me.colingrimes.primoria.gear.bow.BowGear;
 import me.colingrimes.primoria.gear.bow.BowInfo;
 import org.bukkit.event.entity.EntityShootBowEvent;
@@ -26,6 +27,12 @@ public class RiderBow extends BowGear {
 	@Override
 	public Message<?> getDescription() {
 		return GearSettings.BOW_RIDER_DESC;
+	}
+
+	@Nonnull
+	@Override
+	public GearGrade getGrade() {
+		return GearGrade.B;
 	}
 
 	@Override

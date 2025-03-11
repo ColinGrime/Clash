@@ -32,6 +32,14 @@ public interface Gear {
 	Message<?> getDescription();
 
 	/**
+	 * Gets the gear's grade.
+	 *
+	 * @return the grade of gear
+	 */
+	@Nonnull
+	GearGrade getGrade();
+
+	/**
 	 * Gets the custom gear.
 	 *
 	 * @return the custom gear

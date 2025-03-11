@@ -3,6 +3,7 @@ package me.colingrimes.primoria.gear.bow.implementation;
 import me.colingrimes.midnight.message.Message;
 import me.colingrimes.primoria.Primoria;
 import me.colingrimes.primoria.config.GearSettings;
+import me.colingrimes.primoria.gear.GearGrade;
 import me.colingrimes.primoria.gear.bow.BowGear;
 import me.colingrimes.primoria.gear.bow.BowInfo;
 import me.colingrimes.midnight.display.Display;
@@ -49,6 +50,12 @@ public class DetonateBow extends BowGear implements Listener {
 	@Override
 	public Message<?> getDescription() {
 		return GearSettings.BOW_DETONATE_DESC;
+	}
+
+	@Nonnull
+	@Override
+	public GearGrade getGrade() {
+		return GearGrade.A;
 	}
 
 	@Override
