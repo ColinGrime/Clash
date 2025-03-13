@@ -35,7 +35,8 @@ public class TeleportationBow extends BowGear {
 	}
 
 	@Override
-	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
+	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
 		bow.shooter().teleport(bow.arrowLocation().setDirection(bow.shooter().getLocation().getDirection()));
+		return true;
 	}
 }

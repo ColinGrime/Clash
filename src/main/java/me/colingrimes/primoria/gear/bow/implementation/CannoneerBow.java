@@ -37,9 +37,10 @@ public class CannoneerBow extends BowGear {
 	}
 
 	@Override
-	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
+	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
 		for (int i=0; i<3; i++) {
 			Entities.spawn(EntityType.TNT, bow.arrowLocation());
 		}
+		return true;
 	}
 }

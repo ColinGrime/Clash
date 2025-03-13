@@ -44,7 +44,7 @@ public class HealerBow extends BowGear {
 	}
 
 	@Override
-	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
+	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
 		List<Location> locations = Locations.between(bow.arrowLocation().clone().add(2,0,2), bow.arrowLocation().clone().add(-1,0,-1));
 		Scheduler.sync().runRepeating(() -> {
 			locations.forEach(loc -> bow.world().spawnParticle(Particle.HEART, loc, 1));
@@ -58,5 +58,6 @@ public class HealerBow extends BowGear {
 				}
 			}
 		}, 0L, 5L, 10 * 20L);
+		return true;
 	}
 }

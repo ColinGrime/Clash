@@ -47,7 +47,7 @@ public class GrappleBow extends BowGear implements Listener {
 	}
 
 	@Override
-	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
+	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
 		Vector direction = Locations.direction(bow.shooterLocation(), bow.arrowLocation());
 		double speed = Math.abs(bow.arrow().getVelocity().length()) * 2.5;
 
@@ -57,6 +57,7 @@ public class GrappleBow extends BowGear implements Listener {
 
 		bow.shooter().setVelocity(launchVelocity);
 		noFallDamage.add(bow.shooter().getUniqueId());
+		return true;
 	}
 
 	@EventHandler

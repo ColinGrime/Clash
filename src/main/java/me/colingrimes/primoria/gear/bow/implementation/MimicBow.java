@@ -63,18 +63,18 @@ public class MimicBow extends BowGear {
 	}
 
 	@Override
-	public void activate(@Nonnull EntityShootBowEvent event, @Nonnull BowInfo bow) {
-		getRandomBow(bow.shooter()).activate(event, bow);
+	public boolean activate(@Nonnull EntityShootBowEvent event, @Nonnull BowInfo bow) {
+		return getRandomBow(bow.shooter()).activate(event, bow);
 	}
 
 	@Override
-	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
-		getRandomBow(bow.shooter()).activate(event, bow);
+	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
+		return getRandomBow(bow.shooter()).activate(event, bow);
 	}
 
 	@Override
-	public void activate(@Nonnull EntityDamageByEntityEvent event, @Nonnull BowInfo bow) {
-		getRandomBow(bow.shooter()).activate(event, bow);
+	public boolean activate(@Nonnull EntityDamageByEntityEvent event, @Nonnull BowInfo bow) {
+		return getRandomBow(bow.shooter()).activate(event, bow);
 	}
 
 	@Nonnull

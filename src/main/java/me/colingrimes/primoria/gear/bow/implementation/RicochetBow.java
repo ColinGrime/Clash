@@ -46,7 +46,7 @@ public class RicochetBow extends BowGear implements Listener {
 	}
 
 	@Override
-	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
+	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
 		bow.removeArrow();
 
 		Vector direction = bow.arrowDirection().multiply(Random.decimal(0.6, 0.7)).add(new Vector(0, 0.1, 0));
@@ -57,12 +57,14 @@ public class RicochetBow extends BowGear implements Listener {
 		if (times < 10) {
 			arrows.put(newArrow, times);
 		}
+		return true;
 	}
 
 	@EventHandler
 	public void onProjectileHit(@Nonnull ProjectileHitEvent event) {
-		if (event.getEntity() instanceof Arrow arrow && arrows.containsKey(arrow)) {
-			activate(event, new BowInfo(null, arrow));
+		BowInfo bow = BowInfo.of(event);
+		if (bow != null && arrows.containsKey((Arrow) event.getEntity())) {
+			activate(event, bow);
 		}
 	}
 }

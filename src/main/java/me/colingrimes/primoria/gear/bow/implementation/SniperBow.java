@@ -46,9 +46,9 @@ public class SniperBow extends BowGear {
 	}
 
 	@Override
-	public void activate(@Nonnull PlayerInteractEvent event, @Nonnull BowInfo bow) {
+	public boolean activate(@Nonnull PlayerInteractEvent event, @Nonnull BowInfo bow) {
 		if (!event.getAction().name().startsWith("LEFT_CLICK")) {
-			return;
+			return false;
 		}
 
 		Player player = event.getPlayer();
@@ -59,10 +59,11 @@ public class SniperBow extends BowGear {
 			player.setWalkSpeed(0.2F);
 			players.remove(player.getUniqueId());
 		}
+		return true;
 	}
 
 	@Override
-	public void activate(@Nonnull EntityShootBowEvent event, @Nonnull BowInfo bow) {
+	public boolean activate(@Nonnull EntityShootBowEvent event, @Nonnull BowInfo bow) {
 		Vector velocity = bow.arrow().getVelocity();
 		if (players.contains(bow.shooter().getUniqueId())) {
 			velocity = velocity.multiply(10);
@@ -72,13 +73,19 @@ public class SniperBow extends BowGear {
 			bow.arrow().setVelocity(velocity.multiply(5));
 			Location eye = bow.shooter().getEyeLocation();
 			bow.world().spawnParticle(Particle.SONIC_BOOM, eye.add(eye.getDirection().normalize()), 1);
+			return true;
+		} else {
+			return false;
 		}
 	}
 
 	@Override
-	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
+	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
 		if (isFullyDraw(bow.arrow().getVelocity())) {
 			bow.world().spawnParticle(Particle.CRIT, bow.arrowLocation(), 20);
+			return true;
+		} else {
+			return false;
 		}
 	}
 

@@ -59,26 +59,28 @@ public class DetonateBow extends BowGear implements Listener {
 	}
 
 	@Override
-	public void activate(@Nonnull EntityShootBowEvent event, @Nonnull BowInfo bow) {
+	public boolean activate(@Nonnull EntityShootBowEvent event, @Nonnull BowInfo bow) {
 		if (event.getEntity() instanceof Player player) {
 			arrows.computeIfAbsent(player, (k) -> new DetonateData(player)).armArrow(bow.arrow());
 		}
+		return true;
 	}
 
 	@Override
-	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
+	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
 		bow.arrow().setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
 		bow.arrow().setInvulnerable(true);
 		bow.arrow().setVisualFire(true);
 		bow.arrow().setGlowing(true);
 		team.addEntry(bow.arrow().getUniqueId().toString());
+		return true;
 	}
 
 	@Override
-	public void activate(@Nonnull PlayerInteractEvent event, @Nonnull BowInfo bow) {
+	public boolean activate(@Nonnull PlayerInteractEvent event, @Nonnull BowInfo bow) {
 		Player player = event.getPlayer();
 		if (!event.getAction().name().startsWith("LEFT_CLICK") || !arrows.containsKey(player)) {
-			return;
+			return false;
 		}
 
 		DetonateData detonate = arrows.get(player);
@@ -87,6 +89,7 @@ public class DetonateBow extends BowGear implements Listener {
 		} else {
 			detonate.explodeArrow();
 		}
+		return true;
 	}
 
 	private class DetonateData {

@@ -43,7 +43,7 @@ public class TrapBow extends BowGear {
 	}
 
 	@Override
-	public void activate(@Nonnull EntityDamageByEntityEvent event, @Nonnull BowInfo bow) {
+	public boolean activate(@Nonnull EntityDamageByEntityEvent event, @Nonnull BowInfo bow) {
 		event.setCancelled(true);
 
 		Location location = bow.arrowLocation();
@@ -66,5 +66,6 @@ public class TrapBow extends BowGear {
 		}
 
 		Scheduler.sync().runLater(() -> oldBlocks.forEach(OldBlock::revert), 5 * 20L);
+		return true;
 	}
 }

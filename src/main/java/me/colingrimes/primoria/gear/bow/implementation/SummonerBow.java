@@ -48,10 +48,11 @@ public class SummonerBow extends BowGear {
 	}
 
 	@Override
-	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
+	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
 		int animals = Random.number(2, 4);
 		for (int i=0; i<animals; i++) {
 			Entities.spawn(Random.item(RANDOM_ANIMALS), bow.arrowLocation());
 		}
+		return true;
 	}
 }

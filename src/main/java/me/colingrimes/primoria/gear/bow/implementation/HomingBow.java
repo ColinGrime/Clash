@@ -42,7 +42,7 @@ public class HomingBow extends BowGear {
 	}
 
 	@Override
-	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
+	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
 		for (Entity entity : Entities.nearby(bow.arrowLocation(), 10)) {
 			if (entity instanceof LivingEntity && !entity.equals(event.getEntity().getShooter())) {
 				Arrow arrow = bow.world().spawnArrow(bow.arrowLocation(), new Vector(0, 0.3, 0), 1.5f, 0);
@@ -53,5 +53,6 @@ public class HomingBow extends BowGear {
 				break;
 			}
 		}
+		return true;
 	}
 }

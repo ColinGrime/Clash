@@ -37,10 +37,11 @@ public class ClusterBow extends BowGear {
 	}
 
 	@Override
-	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
+	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
 		bow.arrow().remove();
 		for (int i=0; i<20; i++) {
 			bow.world().spawnArrow(bow.arrowLocation(), new Vector(0, 1, 0), (float) Random.decimal(0.8, 1.2), 10);
 		}
+		return true;
 	}
 }

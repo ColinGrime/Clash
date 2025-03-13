@@ -9,7 +9,6 @@ import me.colingrimes.primoria.gear.bow.BowGear;
 import me.colingrimes.primoria.gear.bow.BowInfo;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -46,10 +45,10 @@ public class BurrowBow extends BowGear implements Listener {
 	}
 
 	@Override
-	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
+	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
 		if (event.getHitBlock() == null) {
 			arrows.remove(bow.arrow());
-			return;
+			return false;
 		}
 
 		bow.removeArrow();
@@ -63,12 +62,14 @@ public class BurrowBow extends BowGear implements Listener {
 		if (times < 10) {
 			arrows.put(arrow, times);
 		}
+		return true;
 	}
 
 	@EventHandler
 	public void onProjectileHit(@Nonnull ProjectileHitEvent event) {
-		if (event.getEntity() instanceof Arrow arrow && arrows.containsKey(arrow)) {
-			activate(event, new BowInfo((LivingEntity) event.getEntity().getShooter(), arrow));
+		BowInfo bow = BowInfo.of(event);
+		if (bow != null && arrows.containsKey((Arrow) event.getEntity())) {
+			activate(event, bow);
 		}
 	}
 }

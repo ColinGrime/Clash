@@ -36,7 +36,8 @@ public class RapidFireBow extends BowGear {
 	}
 
 	@Override
-	public void activate(@Nonnull PlayerInteractEvent event, @Nonnull BowInfo bow) {
+	public boolean activate(@Nonnull PlayerInteractEvent event, @Nonnull BowInfo bow) {
 		bow.shooter().launchProjectile(Arrow.class, bow.shooterDirection());
+		return true;
 	}
 }

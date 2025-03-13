@@ -38,9 +38,10 @@ public class TripletBow extends BowGear {
 	}
 
 	@Override
-	public void activate(@Nonnull EntityShootBowEvent event, @Nonnull BowInfo bow) {
+	public boolean activate(@Nonnull EntityShootBowEvent event, @Nonnull BowInfo bow) {
 		fireArrow(bow, 3);
 		fireArrow(bow, -3);
+		return true;
 	}
 
 	/**

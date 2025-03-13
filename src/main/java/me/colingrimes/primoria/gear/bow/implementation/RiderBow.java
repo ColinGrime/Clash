@@ -36,12 +36,14 @@ public class RiderBow extends BowGear {
 	}
 
 	@Override
-	public void activate(@Nonnull EntityShootBowEvent event, @Nonnull BowInfo bow) {
+	public boolean activate(@Nonnull EntityShootBowEvent event, @Nonnull BowInfo bow) {
 		bow.arrow().addPassenger(bow.shooter());
+		return true;
 	}
 
 	@Override
-	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
+	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
 		bow.arrow().remove();
+		return true;
 	}
 }

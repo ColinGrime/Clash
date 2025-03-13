@@ -41,14 +41,14 @@ public class AnchorBow extends BowGear {
 	}
 
 	@Override
-	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
+	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
 		Location location;
 		if (event.getHitBlock() != null) {
 			location = event.getHitBlock().getLocation();
 		} else if (event.getHitEntity() != null) {
 			location = event.getHitEntity().getLocation();
 		} else {
-			return;
+			return false;
 		}
 
 		bow.removeArrow();
@@ -61,5 +61,6 @@ public class AnchorBow extends BowGear {
 				entity.damage(1);
 			}
 		}, 0L, 10L, 5 * 20L);
+		return true;
 	}
 }

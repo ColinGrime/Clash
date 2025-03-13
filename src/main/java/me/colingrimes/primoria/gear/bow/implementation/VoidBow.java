@@ -47,7 +47,7 @@ public class VoidBow extends BowGear {
 	}
 
 	@Override
-	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
+	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
 		bow.removeArrow();
 
 		Location location = bow.arrowLocation();
@@ -81,10 +81,12 @@ public class VoidBow extends BowGear {
 				}
 			}
 		}, 0L, 5L);
+		return true;
 	}
 
 	@Override
-	public void activate(@Nonnull EntityDamageByEntityEvent event, @Nonnull BowInfo bow) {
+	public boolean activate(@Nonnull EntityDamageByEntityEvent event, @Nonnull BowInfo bow) {
 		event.setCancelled(true);
+		return true;
 	}
 }
