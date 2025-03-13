@@ -6,6 +6,12 @@ import org.bukkit.World;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.event.Event;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerPickupArrowEvent;
 import org.bukkit.util.Vector;
 
 import javax.annotation.Nonnull;
@@ -17,15 +23,27 @@ public class BowInfo {
 	private final Arrow arrow;
 	private final Entity damaged;
 
-	public BowInfo(@Nullable LivingEntity shooter) {
+	@Nullable
+	public static BowInfo of(@Nonnull Event event) {
+		return switch (event) {
+			case PlayerInteractEvent e -> new BowInfo(e.getPlayer());
+			case EntityShootBowEvent e when e.getProjectile() instanceof Arrow a -> new BowInfo(e.getEntity(), a);
+			case ProjectileHitEvent e when e.getEntity() instanceof Arrow a && a.getShooter() instanceof LivingEntity s -> new BowInfo(s, a);
+			case EntityDamageByEntityEvent e when e.getDamager() instanceof Arrow a && a.getShooter() instanceof LivingEntity s -> new BowInfo(s, a, e.getEntity());
+			case PlayerPickupArrowEvent e when e.getArrow().getShooter() instanceof LivingEntity s -> new BowInfo(s, (Arrow) e.getArrow());
+			default -> null;
+		};
+	}
+
+	private BowInfo(@Nullable LivingEntity shooter) {
 		this(shooter, null);
 	}
 
-	public BowInfo(@Nullable LivingEntity shooter, @Nullable Arrow arrow) {
+	private BowInfo(@Nullable LivingEntity shooter, @Nullable Arrow arrow) {
 		this(shooter, arrow, null);
 	}
 
-	public BowInfo(@Nullable LivingEntity shooter, @Nullable Arrow arrow, @Nullable Entity damaged) {
+	private BowInfo(@Nullable LivingEntity shooter, @Nullable Arrow arrow, @Nullable Entity damaged) {
 		this.shooter = shooter;
 		this.arrow = arrow;
 		this.damaged = damaged;

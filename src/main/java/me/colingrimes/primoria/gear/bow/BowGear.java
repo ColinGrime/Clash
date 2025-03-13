@@ -1,9 +1,12 @@
 package me.colingrimes.primoria.gear.bow;
 
+import me.colingrimes.midnight.util.Common;
 import me.colingrimes.primoria.Primoria;
+import me.colingrimes.primoria.api.GearUseEvent;
 import me.colingrimes.primoria.gear.Gear;
 import me.colingrimes.midnight.util.bukkit.Items;
 import org.bukkit.Material;
+import org.bukkit.event.Event;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -41,21 +44,49 @@ public abstract class BowGear implements Gear {
 				.build();
 	}
 
+	@Override
+	public boolean activate(@Nonnull Event event) {
+		BowInfo bow = BowInfo.of(event);
+		if (bow == null) {
+			return false;
+		}
+
+		GearUseEvent gearUseEvent = Common.call(new GearUseEvent(this, bow.shooter()));
+		if (gearUseEvent.isCancelled()) {
+			return false;
+		}
+
+		return switch (event) {
+			case PlayerInteractEvent e -> activate(e, bow);
+			case EntityShootBowEvent e -> activate(e, bow);
+			case ProjectileHitEvent e -> activate(e, bow);
+			case EntityDamageByEntityEvent e -> activate(e, bow);
+			case PlayerPickupArrowEvent e -> activate(e, bow);
+			default -> false;
+		};
+	}
+
 	/**
 	 * Used to activate interaction abilities.
 	 *
 	 * @param event the player interact event
 	 * @param bow the bow info
+	 * @return true if the gear was succesfully activated
 	 */
-	public void activate(@Nonnull PlayerInteractEvent event, @Nonnull BowInfo bow) {}
+	public boolean activate(@Nonnull PlayerInteractEvent event, @Nonnull BowInfo bow) {
+		return false;
+	}
 
 	/**
 	 * Used to activate abilities on regular bow shot.
 	 *
 	 * @param event the player shoot bow event
 	 * @param bow the bow info
+	 * @return true if the gear was succesfully activated
 	 */
-	public void activate(@Nonnull EntityShootBowEvent event, @Nonnull BowInfo bow) {}
+	public boolean activate(@Nonnull EntityShootBowEvent event, @Nonnull BowInfo bow) {
+		return false;
+	}
 
 	/**
 	 * Used to activate abilities when an arrow lands.
@@ -65,8 +96,11 @@ public abstract class BowGear implements Gear {
 	 *
 	 * @param event the arrow hit event
 	 * @param bow the bow info
+	 * @return true if the gear was succesfully activated
 	 */
-	public void activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {}
+	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
+		return false;
+	}
 
 	/**
 	 * Used to activate abilities when an arrow damages an entity.
@@ -76,14 +110,20 @@ public abstract class BowGear implements Gear {
 	 *
 	 * @param event the arrow damage event
 	 * @param bow the bow info
+	 * @return true if the gear was succesfully activated
 	 */
-	public void activate(@Nonnull EntityDamageByEntityEvent event, @Nonnull BowInfo bow) {}
+	public boolean activate(@Nonnull EntityDamageByEntityEvent event, @Nonnull BowInfo bow) {
+		return false;
+	}
 
 	/**
 	 * Used to handle custom arrow pickup events.
 	 *
 	 * @param event the arrow pickup event
 	 * @param bow the bow info
+	 * @return true if the gear was succesfully activated
 	 */
-	public void activate(@Nonnull PlayerPickupArrowEvent event, @Nonnull BowInfo bow) {}
+	public boolean activate(@Nonnull PlayerPickupArrowEvent event, @Nonnull BowInfo bow) {
+		return false;
+	}
 }
