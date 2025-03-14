@@ -47,6 +47,11 @@ public class VoidBow extends BowGear {
 	}
 
 	@Override
+	public double getCooldown() {
+		return 5;
+	}
+
+	@Override
 	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
 		Location location = bow.arrowLocation();
 		Optional<LivingEntity> entity = Entities.find(LivingEntity.class, location, 2);

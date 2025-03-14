@@ -37,6 +37,11 @@ public class ClusterBow extends BowGear {
 	}
 
 	@Override
+	public double getCooldown() {
+		return 3;
+	}
+
+	@Override
 	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
 		bow.arrow().remove();
 		for (int i=0; i<20; i++) {

@@ -46,6 +46,11 @@ public class SniperBow extends BowGear {
 	}
 
 	@Override
+	public double getCooldown() {
+		return 5;
+	}
+
+	@Override
 	public boolean activate(@Nonnull PlayerInteractEvent event, @Nonnull BowInfo bow) {
 		if (!event.getAction().name().startsWith("LEFT_CLICK")) {
 			return false;

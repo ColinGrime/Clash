@@ -38,6 +38,11 @@ public class TripletBow extends BowGear {
 	}
 
 	@Override
+	public double getCooldown() {
+		return 1;
+	}
+
+	@Override
 	public boolean activate(@Nonnull EntityShootBowEvent event, @Nonnull BowInfo bow) {
 		fireArrow(bow, 3);
 		fireArrow(bow, -3);

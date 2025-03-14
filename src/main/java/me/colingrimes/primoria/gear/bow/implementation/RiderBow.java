@@ -36,6 +36,11 @@ public class RiderBow extends BowGear {
 	}
 
 	@Override
+	public double getCooldown() {
+		return 10;
+	}
+
+	@Override
 	public boolean removeArrow() {
 		return false;
 	}

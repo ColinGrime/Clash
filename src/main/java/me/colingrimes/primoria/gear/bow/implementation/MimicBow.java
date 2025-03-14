@@ -63,6 +63,11 @@ public class MimicBow extends BowGear {
 	}
 
 	@Override
+	public double getCooldown() {
+		return 1;
+	}
+
+	@Override
 	public boolean activate(@Nonnull EntityShootBowEvent event, @Nonnull BowInfo bow) {
 		return getRandomBow(bow.shooter()).activate(event, bow);
 	}

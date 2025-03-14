@@ -42,13 +42,13 @@ public interface Gear {
 	GearGrade getGrade();
 
 	/**
-	 * Gets the gear's cooldown time when used.
+	 * Gets the gear's cooldown time when activated.
 	 * <p>
 	 * Set to -1 for no cooldown.
 	 *
-	 * @return the cooldown time in ticks
+	 * @return the cooldown time in seconds
 	 */
-	default int getCooldown() {
+	default double getCooldown() {
 		return -1;
 	}
 

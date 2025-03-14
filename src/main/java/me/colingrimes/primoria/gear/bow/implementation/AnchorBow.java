@@ -41,6 +41,11 @@ public class AnchorBow extends BowGear {
 	}
 
 	@Override
+	public double getCooldown() {
+		return 10;
+	}
+
+	@Override
 	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
 		Location location;
 		if (event.getHitBlock() != null) {

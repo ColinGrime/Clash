@@ -3,7 +3,7 @@ package me.colingrimes.primoria.gear.bow.implementation;
 import me.colingrimes.midnight.message.Message;
 import me.colingrimes.primoria.Primoria;
 import me.colingrimes.primoria.config.GearSettings;
-import me.colingrimes.primoria.gear.GearGrade;
+import me.colingrimes.primoria.gear.util.GearGrade;
 import me.colingrimes.primoria.gear.bow.BowGear;
 import me.colingrimes.primoria.gear.bow.BowInfo;
 import me.colingrimes.midnight.util.bukkit.Entities;
@@ -34,6 +34,11 @@ public class CannoneerBow extends BowGear {
 	@Override
 	public GearGrade getGrade() {
 		return GearGrade.B;
+	}
+
+	@Override
+	public double getCooldown() {
+		return 5;
 	}
 
 	@Override

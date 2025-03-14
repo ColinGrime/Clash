@@ -42,6 +42,11 @@ public class HomingBow extends BowGear {
 	}
 
 	@Override
+	public double getCooldown() {
+		return 5;
+	}
+
+	@Override
 	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
 		for (Entity entity : Entities.nearby(bow.arrowLocation(), 10)) {
 			if (entity instanceof LivingEntity && !entity.equals(event.getEntity().getShooter())) {

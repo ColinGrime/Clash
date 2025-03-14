@@ -44,6 +44,11 @@ public class HealerBow extends BowGear {
 	}
 
 	@Override
+	public double getCooldown() {
+		return 10;
+	}
+
+	@Override
 	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
 		List<Location> locations = Locations.between(bow.arrowLocation().clone().add(2,0,2), bow.arrowLocation().clone().add(-1,0,-1));
 		Scheduler.sync().runRepeating(() -> {

@@ -59,6 +59,11 @@ public class DetonateBow extends BowGear implements Listener {
 	}
 
 	@Override
+	public double getCooldown() {
+		return 1;
+	}
+
+	@Override
 	public boolean removeArrow() {
 		return false;
 	}
@@ -68,7 +73,7 @@ public class DetonateBow extends BowGear implements Listener {
 		if (event.getEntity() instanceof Player player) {
 			arrows.computeIfAbsent(player, (k) -> new DetonateData(player)).armArrow(bow.arrow());
 		}
-		return true;
+		return false;
 	}
 
 	@Override
@@ -78,7 +83,7 @@ public class DetonateBow extends BowGear implements Listener {
 		bow.arrow().setVisualFire(true);
 		bow.arrow().setGlowing(true);
 		team.addEntry(bow.arrow().getUniqueId().toString());
-		return true;
+		return false;
 	}
 
 	@Override

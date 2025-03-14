@@ -46,6 +46,11 @@ public class EmberBow extends BowGear {
 	}
 
 	@Override
+	public double getCooldown() {
+		return 10;
+	}
+
+	@Override
 	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
 		for (int i=0; i<20; i++) {
 			Item item = bow.world().dropItem(bow.arrowLocation(), Items.of(Random.item(materials)).nbt("random", UUID.randomUUID().toString()).build());

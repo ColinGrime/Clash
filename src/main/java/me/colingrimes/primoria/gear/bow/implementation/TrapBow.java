@@ -43,6 +43,11 @@ public class TrapBow extends BowGear {
 	}
 
 	@Override
+	public double getCooldown() {
+		return 5;
+	}
+
+	@Override
 	public boolean activate(@Nonnull EntityDamageByEntityEvent event, @Nonnull BowInfo bow) {
 		event.setCancelled(true);
 

@@ -12,7 +12,7 @@ import java.time.Duration;
 
 public abstract class BaseGear implements Gear, Listener {
 
-	protected final Cooldown<LivingEntity> cooldown = Cooldown.create(Duration.ofMillis(getCooldown() * 50L));
+	protected final Cooldown<LivingEntity> cooldown = Cooldown.create(Duration.ofMillis((long) (getCooldown() * 1000)));
 	protected final Primoria plugin;
 	protected final String id;
 
@@ -41,8 +41,9 @@ public abstract class BaseGear implements Gear, Listener {
 
 		// Show cooldown bar to players.
 		if (entity instanceof Player player) {
-			BossBar bossBar = new BossBar(getName().toText() + " Cooldown");
-			bossBar.animateProgress(getCooldown());
+			BossBar bossBar = new BossBar(getGrade().getColor() + getName().toText() + " Cooldown");
+			bossBar.setColor(getGrade().getBarColor());
+			bossBar.animateProgress((int) (getCooldown() * 20));
 			bossBar.show(player);
 		}
 	}
