@@ -51,9 +51,7 @@ public class AnchorBow extends BowGear {
 			return false;
 		}
 
-		bow.removeArrow();
 		Location anchorLocation = location.clone().add(0, 1, 0);
-
 		Scheduler.sync().runRepeating(() -> {
 			Entities.spawn(EntityType.EVOKER_FANGS, anchorLocation);
 			for (LivingEntity entity : Entities.nearby(LivingEntity.class, anchorLocation, 3)) {

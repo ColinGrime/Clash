@@ -51,7 +51,6 @@ public class BurrowBow extends BowGear implements Listener {
 			return false;
 		}
 
-		bow.removeArrow();
 		event.getHitBlock().setType(Material.AIR);
 
 		Arrow arrow = bow.world().spawnArrow(bow.arrowLocation(), bow.arrowDirection(), 0, 0);

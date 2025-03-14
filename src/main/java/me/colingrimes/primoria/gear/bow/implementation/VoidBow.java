@@ -48,8 +48,6 @@ public class VoidBow extends BowGear {
 
 	@Override
 	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
-		bow.removeArrow();
-
 		Location location = bow.arrowLocation();
 		Optional<LivingEntity> entity = Entities.find(LivingEntity.class, location, 2);
 		if (entity.isPresent()) {
@@ -87,6 +85,6 @@ public class VoidBow extends BowGear {
 	@Override
 	public boolean activate(@Nonnull EntityDamageByEntityEvent event, @Nonnull BowInfo bow) {
 		event.setCancelled(true);
-		return true;
+		return false;
 	}
 }

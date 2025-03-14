@@ -52,7 +52,6 @@ public class MeteoriteBow extends BowGear {
 
 	@Override
 	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
-		bow.arrow().remove();
 		spawnMeteor(bow.arrowLocation());
 		return true;
 	}

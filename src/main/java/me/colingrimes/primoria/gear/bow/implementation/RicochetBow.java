@@ -47,8 +47,6 @@ public class RicochetBow extends BowGear implements Listener {
 
 	@Override
 	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
-		bow.removeArrow();
-
 		Vector direction = bow.arrowDirection().multiply(Random.decimal(0.6, 0.7)).add(new Vector(0, 0.1, 0));
 		Arrow newArrow = bow.world().spawnArrow(bow.arrowLocation(), direction, (float) direction.length(),0);
 

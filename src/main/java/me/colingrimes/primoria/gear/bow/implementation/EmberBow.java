@@ -47,7 +47,6 @@ public class EmberBow extends BowGear {
 
 	@Override
 	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
-		bow.removeArrow();
 		for (int i=0; i<20; i++) {
 			Item item = bow.world().dropItem(bow.arrowLocation(), Items.of(Random.item(materials)).nbt("random", UUID.randomUUID().toString()).build());
 			double x = (Math.random() - 0.5);

@@ -59,6 +59,11 @@ public class DetonateBow extends BowGear implements Listener {
 	}
 
 	@Override
+	public boolean removeArrow() {
+		return false;
+	}
+
+	@Override
 	public boolean activate(@Nonnull EntityShootBowEvent event, @Nonnull BowInfo bow) {
 		if (event.getEntity() instanceof Player player) {
 			arrows.computeIfAbsent(player, (k) -> new DetonateData(player)).armArrow(bow.arrow());
