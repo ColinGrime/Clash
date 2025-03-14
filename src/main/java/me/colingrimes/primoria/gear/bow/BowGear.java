@@ -16,6 +16,7 @@ import org.bukkit.event.player.PlayerPickupArrowEvent;
 import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
 public abstract class BowGear extends BaseGear {
 
@@ -32,9 +33,17 @@ public abstract class BowGear extends BaseGear {
 
 	@Nonnull
 	public ItemStack getGear() {
+		String name = getGrade().getColor() + getName().toText() + " &7(" + getGrade().getName() + "&7)";
+
+		// Add cooldown to name if applicable.
+		if (getCooldown() > 0) {
+			String cooldown = getCooldown() % 1 == 0 ? String.valueOf((int) getCooldown()) : String.valueOf(getCooldown());
+			name += " (&e" + cooldown + " second" + (!cooldown.equals("1") ? "s" : "") + "&7)";
+		}
+
 		return Items.of(Material.BOW)
-				.name(getGrade().getColor() + getName().toText())
-				.lore(new String[]{ "&7" + getDescription().toText(), "", "&7Grade: " + getGrade().getName() })
+				.name(name)
+				.lore(List.of("&7" + getDescription().toText()))
 				.hide()
 				.glow()
 				.unbreakable()
