@@ -51,6 +51,11 @@ public class SniperBow extends BowGear {
 	}
 
 	@Override
+	public boolean removeArrow() {
+		return false;
+	}
+
+	@Override
 	public boolean activate(@Nonnull PlayerInteractEvent event, @Nonnull BowInfo bow) {
 		if (!event.getAction().name().startsWith("LEFT_CLICK")) {
 			return false;
@@ -64,7 +69,7 @@ public class SniperBow extends BowGear {
 			player.setWalkSpeed(0.2F);
 			players.remove(player.getUniqueId());
 		}
-		return true;
+		return false;
 	}
 
 	@Override
@@ -88,10 +93,8 @@ public class SniperBow extends BowGear {
 	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
 		if (isFullyDraw(bow.arrow().getVelocity())) {
 			bow.world().spawnParticle(Particle.CRIT, bow.arrowLocation(), 20);
-			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	private boolean isFullyDraw(@Nonnull Vector velocity) {
