@@ -1,6 +1,7 @@
 package me.colingrimes.primoria.gear.util;
 
 import me.colingrimes.midnight.util.text.Text;
+import org.bukkit.boss.BarColor;
 
 import javax.annotation.Nonnull;
 
@@ -9,19 +10,21 @@ import javax.annotation.Nonnull;
  */
 public enum GearGrade {
 
-	S(5, "&9&l"),
-	A(4, "&c&l"),
-	B(3, "&6&l"),
-	C(2, "&e&l"),
-	D(1, "&7&l"),
-	F(0, "&8&l");
+	S(5, "&9&l", BarColor.PURPLE),
+	A(4, "&c&l", BarColor.RED),
+	B(3, "&6&l", BarColor.YELLOW),
+	C(2, "&e&l", BarColor.YELLOW),
+	D(1, "&7&l", BarColor.WHITE),
+	F(0, "&8&l", BarColor.WHITE);
 
 	private final int grade;
 	private final String color;
+	private final BarColor barColor;
 
-	GearGrade(int grade, @Nonnull String color) {
+	GearGrade(int grade, @Nonnull String color, @Nonnull BarColor barColor) {
 		this.grade = grade;
 		this.color = color;
+		this.barColor = barColor;
 	}
 
 	/**
@@ -51,5 +54,15 @@ public enum GearGrade {
 	@Nonnull
 	public String getColor() {
 		return Text.color(color);
+	}
+
+	/**
+	 * Gets the boss bar color associated with this grade.
+	 *
+	 * @return the boss bar color
+	 */
+	@Nonnull
+	public BarColor getBarColor() {
+		return barColor;
 	}
 }
