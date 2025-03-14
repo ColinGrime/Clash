@@ -1,6 +1,7 @@
 package me.colingrimes.primoria.gear.bow;
 
 import me.colingrimes.midnight.util.Common;
+import me.colingrimes.midnight.util.text.Text;
 import me.colingrimes.primoria.Primoria;
 import me.colingrimes.primoria.api.GearActivateEvent;
 import me.colingrimes.primoria.api.GearUseEvent;
@@ -58,8 +59,11 @@ public abstract class BowGear extends BaseGear {
 			return false;
 		}
 
-		// Bow gear is on cooldown, remove arrow & return.
+		// Bow gear is on cooldown.
 		if (cooldown.onCooldown(bow.shooter())) {
+			if (!(event instanceof PlayerInteractEvent)) {
+				bow.shooter().sendMessage(Text.color("&7Your " + getGrade().getColor() + getName().toText() + " &7gear is currently on cooldown!"));
+			}
 			bow.removeArrow();
 			return false;
 		}
