@@ -2,9 +2,10 @@ package me.colingrimes.primoria.gear.bow;
 
 import me.colingrimes.midnight.util.Common;
 import me.colingrimes.primoria.Primoria;
+import me.colingrimes.primoria.api.GearActivateEvent;
 import me.colingrimes.primoria.api.GearUseEvent;
-import me.colingrimes.primoria.gear.Gear;
 import me.colingrimes.midnight.util.bukkit.Items;
+import me.colingrimes.primoria.gear.BaseGear;
 import org.bukkit.Material;
 import org.bukkit.event.Event;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -16,20 +17,17 @@ import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
 
-public abstract class BowGear implements Gear {
-
-	protected Primoria plugin;
-	protected String id;
+public abstract class BowGear extends BaseGear {
 
 	public BowGear(@Nonnull Primoria plugin, @Nonnull String id) {
-		this.plugin = plugin;
-		this.id = id;
+		super(plugin, id);
 	}
 
-	@Nonnull
-	@Override
-	public String getId() {
-		return id;
+	/**
+	 * @return true if arrows shot from this gear should be removed after successful activation
+	 */
+	public boolean removeArrow() {
+		return true;
 	}
 
 	@Nonnull
@@ -51,12 +49,18 @@ public abstract class BowGear implements Gear {
 			return false;
 		}
 
+		// Bow gear is on cooldown, remove arrow & return.
+		if (cooldown.onCooldown(bow.shooter())) {
+			bow.removeArrow();
+			return false;
+		}
+
 		GearUseEvent gearUseEvent = Common.call(new GearUseEvent(this, bow.shooter()));
 		if (gearUseEvent.isCancelled()) {
 			return false;
 		}
 
-		return switch (event) {
+		boolean success = switch (event) {
 			case PlayerInteractEvent e -> activate(e, bow);
 			case EntityShootBowEvent e -> activate(e, bow);
 			case ProjectileHitEvent e -> activate(e, bow);
@@ -64,6 +68,19 @@ public abstract class BowGear implements Gear {
 			case PlayerPickupArrowEvent e -> activate(e, bow);
 			default -> false;
 		};
+
+		if (!success) {
+			return false;
+		}
+
+		// Remove the arrow on successful activation if applicable.
+		if (removeArrow()) {
+			bow.removeArrow();
+		}
+
+		startCooldown(bow.shooter());
+		Common.call(new GearActivateEvent(this, bow.shooter()));
+		return true;
 	}
 
 	/**
