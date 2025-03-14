@@ -3,7 +3,7 @@ package me.colingrimes.primoria.gear.bow.implementation;
 import me.colingrimes.midnight.message.Message;
 import me.colingrimes.primoria.Primoria;
 import me.colingrimes.primoria.config.GearSettings;
-import me.colingrimes.primoria.gear.GearGrade;
+import me.colingrimes.primoria.gear.util.GearGrade;
 import me.colingrimes.primoria.gear.bow.BowGear;
 import me.colingrimes.primoria.gear.bow.BowInfo;
 import me.colingrimes.midnight.scheduler.Scheduler;

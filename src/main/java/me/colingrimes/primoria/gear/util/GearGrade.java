@@ -1,4 +1,4 @@
-package me.colingrimes.primoria.gear;
+package me.colingrimes.primoria.gear.util;
 
 import me.colingrimes.midnight.util.text.Text;
 

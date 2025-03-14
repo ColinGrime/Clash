@@ -1,6 +1,7 @@
 package me.colingrimes.primoria.gear;
 
 import me.colingrimes.midnight.message.Message;
+import me.colingrimes.primoria.gear.util.GearGrade;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 
