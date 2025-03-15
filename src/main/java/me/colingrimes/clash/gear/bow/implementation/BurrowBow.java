@@ -49,12 +49,14 @@ public class BurrowBow extends BowGear implements Listener {
 		if (event.getHitBlock() == null) {
 			arrows.remove(bow.arrow());
 			return false;
+		} else {
+			event.getHitBlock().setType(Material.AIR);
 		}
 
-		event.getHitBlock().setType(Material.AIR);
 
 		Arrow arrow = bow.world().spawnArrow(bow.arrowLocation(), bow.arrowDirection(), 0, 0);
 		arrow.setVelocity(bow.arrow().getVelocity());
+		arrow.setShooter(bow.shooter());
 
 		int times = arrows.getOrDefault(bow.arrow(), 0) + 1;
 		arrows.remove(bow.arrow());
@@ -67,7 +69,8 @@ public class BurrowBow extends BowGear implements Listener {
 	@EventHandler
 	public void onProjectileHit(@Nonnull ProjectileHitEvent event) {
 		BowInfo bow = BowInfo.of(event);
-		if (bow != null && arrows.containsKey((Arrow) event.getEntity())) {
+		if (bow != null && arrows.containsKey(bow.arrow())) {
+			bow.removeArrow();
 			activate(event, bow);
 		}
 	}
