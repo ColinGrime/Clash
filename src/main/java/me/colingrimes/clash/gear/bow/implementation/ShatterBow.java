@@ -35,8 +35,13 @@ public class ShatterBow extends BowGear {
 	}
 
 	@Override
+	public double getCooldown() {
+		return 5;
+	}
+
+	@Override
 	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
-		bow.world().createExplosion(bow.arrowLocation(), 6F, false, false);
+		bow.world().createExplosion(bow.arrowLocation(), 6F, true);
 		return true;
 	}
 }

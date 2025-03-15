@@ -8,7 +8,7 @@ import me.colingrimes.clash.gear.bow.BowGear;
 import me.colingrimes.clash.gear.bow.BowInfo;
 import me.colingrimes.midnight.cache.Cooldown;
 import me.colingrimes.midnight.util.Common;
-import me.colingrimes.midnight.util.bukkit.Locations;
+import me.colingrimes.midnight.util.bukkit.Vectors;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -53,7 +53,7 @@ public class GrappleBow extends BowGear implements Listener {
 
 	@Override
 	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
-		Vector direction = Locations.direction(bow.shooterLocation(), bow.arrowLocation());
+		Vector direction = Vectors.direction(bow.shooter(), bow.arrow());
 		double speed = Math.abs(bow.arrow().getVelocity().length()) * 2.5;
 
 		Vector launchVelocity = direction.multiply(speed);

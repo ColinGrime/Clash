@@ -8,7 +8,7 @@ import me.colingrimes.clash.gear.bow.BowGear;
 import me.colingrimes.clash.gear.bow.BowInfo;
 import me.colingrimes.midnight.scheduler.Scheduler;
 import me.colingrimes.midnight.util.bukkit.Entities;
-import me.colingrimes.midnight.util.bukkit.Locations;
+import me.colingrimes.midnight.util.bukkit.Vectors;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -53,7 +53,7 @@ public class HomingBow extends BowGear {
 				Arrow arrow = bow.world().spawnArrow(bow.arrowLocation(), new Vector(0, 0.3, 0), 1.5f, 0);
 				Scheduler.sync().runLater(() -> {
 					arrow.remove();
-					bow.world().spawnArrow(arrow.getLocation(), Locations.direction(arrow.getLocation(), entity.getLocation()), 2f, 0);
+					bow.world().spawnArrow(arrow.getLocation(), Vectors.direction(arrow, entity), 2f, 0);
 				}, 5L);
 				break;
 			}
