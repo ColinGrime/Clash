@@ -8,6 +8,7 @@ import me.colingrimes.clash.gear.util.GearGrade;
 import me.colingrimes.clash.gear.bow.BowGear;
 import me.colingrimes.clash.gear.bow.BowInfo;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -46,11 +47,13 @@ public class BurrowBow extends BowGear implements Listener {
 
 	@Override
 	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
-		if (event.getHitBlock() == null) {
+		Block hit = event.getHitBlock();
+		if (hit == null || hit.getType().getBlastResistance() >= 1200) {
 			arrows.remove(bow.arrow());
 			return false;
 		} else {
-			event.getHitBlock().setType(Material.AIR);
+			hit.getDrops().forEach(drop -> hit.getWorld().dropItemNaturally(hit.getLocation(), drop));
+			hit.setType(Material.AIR);
 		}
 
 
