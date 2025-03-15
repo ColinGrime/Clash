@@ -48,12 +48,13 @@ public class RicochetBow extends BowGear implements Listener {
 	@Override
 	public boolean activate(@Nonnull ProjectileHitEvent event, @Nonnull BowInfo bow) {
 		Vector direction = bow.arrowDirection().multiply(Random.decimal(0.6, 0.7)).add(new Vector(0, 0.1, 0));
-		Arrow newArrow = bow.world().spawnArrow(bow.arrowLocation(), direction, (float) direction.length(),0);
+		Arrow arrow = bow.world().spawnArrow(bow.arrowLocation(), direction, (float) direction.length(),0);
+		arrow.setShooter(bow.shooter());
 
 		int times = arrows.getOrDefault(bow.arrow(), 0) + 1;
 		arrows.remove(bow.arrow());
 		if (times < 10) {
-			arrows.put(newArrow, times);
+			arrows.put(arrow, times);
 		}
 		return true;
 	}
@@ -61,7 +62,8 @@ public class RicochetBow extends BowGear implements Listener {
 	@EventHandler
 	public void onProjectileHit(@Nonnull ProjectileHitEvent event) {
 		BowInfo bow = BowInfo.of(event);
-		if (bow != null && arrows.containsKey((Arrow) event.getEntity())) {
+		if (bow != null && arrows.containsKey(bow.arrow())) {
+			bow.removeArrow();
 			activate(event, bow);
 		}
 	}
