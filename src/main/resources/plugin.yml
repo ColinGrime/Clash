@@ -1,5 +1,5 @@
-name: Primoria
-main: me.colingrimes.primoria.Primoria
+name: Clash
+main: me.colingrimes.clash.Clash
 version: ${version}
 api-version: 1.20
 author: Scill

@@ -9,7 +9,7 @@ java {
     targetCompatibility JavaVersion.VERSION_21
 }
 
-group 'me.colingrimes.primoria'
+group 'me.colingrimes.clash'
 version '1.0.0-alpha'
 
 repositories {
