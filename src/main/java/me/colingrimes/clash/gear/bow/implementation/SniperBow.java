@@ -6,6 +6,8 @@ import me.colingrimes.clash.config.GearSettings;
 import me.colingrimes.clash.gear.util.GearGrade;
 import me.colingrimes.clash.gear.bow.BowGear;
 import me.colingrimes.clash.gear.bow.BowInfo;
+import me.colingrimes.midnight.scheduler.Scheduler;
+import me.colingrimes.midnight.util.bukkit.Players;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;
@@ -16,6 +18,7 @@ import org.bukkit.util.Vector;
 
 import javax.annotation.Nonnull;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -25,6 +28,19 @@ public class SniperBow extends BowGear {
 
 	public SniperBow(@Nonnull Clash plugin) {
 		super(plugin, "sniper");
+		this.checkSnipers();
+	}
+
+	private void checkSnipers() {
+		Scheduler.sync().runRepeating(() -> {
+			players.stream().map(Players::get).flatMap(Optional::stream).forEach(player -> {
+				Optional<BowGear> bow = plugin.findBow(player.getInventory().getItemInMainHand());
+				if (bow.isEmpty() || !bow.get().equals(this)) {
+					player.setWalkSpeed(0.2F);
+					players.remove(player.getUniqueId());
+				}
+			});
+		}, 10L, 10L);
 	}
 
 	@Nonnull
