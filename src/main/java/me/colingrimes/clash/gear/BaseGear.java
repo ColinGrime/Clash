@@ -1,6 +1,7 @@
 package me.colingrimes.clash.gear;
 
 import me.colingrimes.midnight.cache.Cooldown;
+import me.colingrimes.midnight.display.Display;
 import me.colingrimes.midnight.display.implementation.BossBar;
 import me.colingrimes.clash.Clash;
 import org.bukkit.entity.LivingEntity;
@@ -27,6 +28,17 @@ public abstract class BaseGear implements Gear, Listener {
 		return id;
 	}
 
+	@Override
+	public boolean onCooldown(@Nonnull LivingEntity entity) {
+		return cooldown.onCooldown(entity);
+	}
+
+	@Nonnull
+	@Override
+	public Duration getTimeLeft(@Nonnull LivingEntity entity) {
+		return cooldown.getTimeLeft(entity);
+	}
+
 	/**
 	 * Starts the cooldown of the gear if applicable.
 	 *
@@ -41,7 +53,8 @@ public abstract class BaseGear implements Gear, Listener {
 
 		// Show cooldown bar to players.
 		if (entity instanceof Player player) {
-			BossBar bossBar = new BossBar(getGrade().getColor() + getName().toText() + " Cooldown");
+			BossBar bossBar = Display.bossBar(getGrade().getColor() + getName().toText() + " Cooldown");
+			bossBar.setId("gear");
 			bossBar.setColor(getGrade().getBarColor());
 			bossBar.animateProgress((int) (getCooldown() * 20));
 			bossBar.show(player);

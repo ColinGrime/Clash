@@ -28,7 +28,7 @@ public abstract class BowGear extends BaseGear {
 	/**
 	 * @return true if arrows shot from this gear should be removed after successful activation
 	 */
-	public boolean removeArrow() {
+	protected boolean removeArrow() {
 		return true;
 	}
 
