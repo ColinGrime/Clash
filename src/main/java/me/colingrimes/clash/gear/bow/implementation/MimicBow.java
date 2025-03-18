@@ -1,6 +1,5 @@
 package me.colingrimes.clash.gear.bow.implementation;
 
-import me.colingrimes.midnight.message.Message;
 import me.colingrimes.clash.Clash;
 import me.colingrimes.clash.config.GearSettings;
 import me.colingrimes.clash.gear.util.GearGrade;
@@ -21,7 +20,6 @@ import java.util.List;
 // TODO - make it so there's a bossbar and it randomly switches bows depending on player
 public class MimicBow extends BowGear {
 
-	private final Clash plugin;
 	private final List<BowGear> mimicableBows = new ArrayList<>();
 	private final List<String> mimicableBowIds = List.of(
 			"anchor",
@@ -40,26 +38,7 @@ public class MimicBow extends BowGear {
 	);
 
 	public MimicBow(@Nonnull Clash plugin) {
-		super(plugin, "mimic");
-		this.plugin = plugin;
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getName() {
-		return GearSettings.BOW_MIMIC_NAME;
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getDescription() {
-		return GearSettings.BOW_MIMIC_DESC;
-	}
-
-	@Nonnull
-	@Override
-	public GearGrade getGrade() {
-		return GearGrade.A;
+		super(plugin, "mimic", GearSettings.BOW_MIMIC_NAME, GearSettings.BOW_MIMIC_DESC, GearGrade.A);
 	}
 
 	@Override
@@ -90,7 +69,7 @@ public class MimicBow extends BowGear {
 
 		BowGear bow = Random.item(mimicableBows);
 		if (entity instanceof Player player) {
-			Display.actionBar(bow.getName().toText()).show(player, 1);
+			Display.actionBar(bow.getName()).show(player, 1);
 		}
 		return bow;
 	}

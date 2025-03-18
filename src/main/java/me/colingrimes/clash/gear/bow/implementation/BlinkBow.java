@@ -1,6 +1,5 @@
 package me.colingrimes.clash.gear.bow.implementation;
 
-import me.colingrimes.midnight.message.Message;
 import me.colingrimes.clash.Clash;
 import me.colingrimes.clash.config.GearSettings;
 import me.colingrimes.clash.gear.util.GearGrade;
@@ -11,25 +10,7 @@ import javax.annotation.Nonnull;
 public class BlinkBow extends BowGear {
 
 	public BlinkBow(@Nonnull Clash plugin) {
-		super(plugin, "blink");
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getName() {
-		return GearSettings.BOW_BLINK_NAME;
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getDescription() {
-		return GearSettings.BOW_BLINK_DESC;
-	}
-
-	@Nonnull
-	@Override
-	public GearGrade getGrade() {
-		return GearGrade.A;
+		super(plugin, "blink", GearSettings.BOW_BLINK_NAME, GearSettings.BOW_BLINK_DESC, GearGrade.A);
 	}
 
 	@Override

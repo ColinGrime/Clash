@@ -1,6 +1,5 @@
 package me.colingrimes.clash.gear.bow.implementation;
 
-import me.colingrimes.midnight.message.Message;
 import me.colingrimes.clash.Clash;
 import me.colingrimes.clash.config.GearSettings;
 import me.colingrimes.clash.gear.util.GearGrade;
@@ -29,7 +28,7 @@ public class DetonateBow extends BowGear implements Listener {
 	private final Team team;
 
 	public DetonateBow(@Nonnull Clash plugin) {
-		super(plugin, "detonate");
+		super(plugin, "detonate", GearSettings.BOW_DETONATE_NAME, GearSettings.BOW_DETONATE_DESC, GearGrade.A);
 		Scoreboard scoreboard = Objects.requireNonNull(Bukkit.getScoreboardManager()).getMainScoreboard();
 		Team team = scoreboard.getTeam("arrowMines");
 		if (scoreboard.getTeam("arrowMines") != null) {
@@ -38,24 +37,6 @@ public class DetonateBow extends BowGear implements Listener {
 			this.team = scoreboard.registerNewTeam("arrowMines");
 			this.team.setColor(ChatColor.RED);
 		}
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getName() {
-		return GearSettings.BOW_DETONATE_NAME;
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getDescription() {
-		return GearSettings.BOW_DETONATE_DESC;
-	}
-
-	@Nonnull
-	@Override
-	public GearGrade getGrade() {
-		return GearGrade.A;
 	}
 
 	@Override

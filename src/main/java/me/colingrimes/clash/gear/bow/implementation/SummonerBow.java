@@ -1,6 +1,5 @@
 package me.colingrimes.clash.gear.bow.implementation;
 
-import me.colingrimes.midnight.message.Message;
 import me.colingrimes.clash.Clash;
 import me.colingrimes.clash.config.GearSettings;
 import me.colingrimes.clash.gear.util.GearGrade;
@@ -26,25 +25,7 @@ public class SummonerBow extends BowGear {
 	};
 
 	public SummonerBow(@Nonnull Clash plugin) {
-		super(plugin, "summoner");
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getName() {
-		return GearSettings.BOW_SUMMONER_NAME;
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getDescription() {
-		return GearSettings.BOW_SUMMONER_DESC;
-	}
-
-	@Nonnull
-	@Override
-	public GearGrade getGrade() {
-		return GearGrade.F;
+		super(plugin, "summoner", GearSettings.BOW_SUMMONER_NAME, GearSettings.BOW_SUMMONER_DESC, GearGrade.F);
 	}
 
 	@Override

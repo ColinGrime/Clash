@@ -1,6 +1,5 @@
 package me.colingrimes.clash.gear.bow.implementation;
 
-import me.colingrimes.midnight.message.Message;
 import me.colingrimes.clash.Clash;
 import me.colingrimes.clash.config.GearSettings;
 import me.colingrimes.clash.gear.util.GearGrade;
@@ -16,25 +15,7 @@ import javax.annotation.Nonnull;
 public class TripletBow extends BowGear {
 
 	public TripletBow(@Nonnull Clash plugin) {
-		super(plugin, "triplet");
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getName() {
-		return GearSettings.BOW_TRIPLET_NAME;
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getDescription() {
-		return GearSettings.BOW_TRIPLET_DESC;
-	}
-
-	@Nonnull
-	@Override
-	public GearGrade getGrade() {
-		return GearGrade.C;
+		super(plugin, "triplet", GearSettings.BOW_TRIPLET_NAME, GearSettings.BOW_TRIPLET_DESC, GearGrade.C);
 	}
 
 	@Override

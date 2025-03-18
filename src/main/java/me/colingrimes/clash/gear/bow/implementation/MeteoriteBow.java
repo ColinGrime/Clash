@@ -1,6 +1,5 @@
 package me.colingrimes.clash.gear.bow.implementation;
 
-import me.colingrimes.midnight.message.Message;
 import me.colingrimes.clash.Clash;
 import me.colingrimes.clash.config.GearSettings;
 import me.colingrimes.clash.gear.util.GearGrade;
@@ -24,25 +23,7 @@ public class MeteoriteBow extends BowGear {
 	private final Material[] materials = {Material.BLACKSTONE, Material.BASALT, Material.CRYING_OBSIDIAN, Material.OBSIDIAN};
 
 	public MeteoriteBow(@Nonnull Clash plugin) {
-		super(plugin, "meteorite");
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getName() {
-		return GearSettings.BOW_METEORITE_NAME;
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getDescription() {
-		return GearSettings.BOW_METEORITE_DESC;
-	}
-
-	@Nonnull
-	@Override
-	public GearGrade getGrade() {
-		return GearGrade.A;
+		super(plugin, "meteorite", GearSettings.BOW_METEORITE_NAME, GearSettings.BOW_METEORITE_DESC, GearGrade.A);
 	}
 
 	@Override

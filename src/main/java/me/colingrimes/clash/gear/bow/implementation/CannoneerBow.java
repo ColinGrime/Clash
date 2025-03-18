@@ -1,6 +1,5 @@
 package me.colingrimes.clash.gear.bow.implementation;
 
-import me.colingrimes.midnight.message.Message;
 import me.colingrimes.clash.Clash;
 import me.colingrimes.clash.config.GearSettings;
 import me.colingrimes.clash.gear.util.GearGrade;
@@ -15,25 +14,7 @@ import javax.annotation.Nonnull;
 public class CannoneerBow extends BowGear {
 
 	public CannoneerBow(@Nonnull Clash plugin) {
-		super(plugin, "cannoneer");
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getName() {
-		return GearSettings.BOW_CANNONEER_NAME;
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getDescription() {
-		return GearSettings.BOW_CANNONEER_DESC;
-	}
-
-	@Nonnull
-	@Override
-	public GearGrade getGrade() {
-		return GearGrade.B;
+		super(plugin, "cannoneer", GearSettings.BOW_CANNONEER_NAME, GearSettings.BOW_CANNONEER_DESC, GearGrade.B);
 	}
 
 	@Override

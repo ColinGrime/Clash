@@ -1,6 +1,5 @@
 package me.colingrimes.clash.gear.bow.implementation;
 
-import me.colingrimes.midnight.message.Message;
 import me.colingrimes.clash.Clash;
 import me.colingrimes.clash.config.GearSettings;
 import me.colingrimes.clash.gear.util.GearGrade;
@@ -25,25 +24,7 @@ import java.util.stream.Collectors;
 public class VoidBow extends BowGear {
 
 	public VoidBow(@Nonnull Clash plugin) {
-		super(plugin, "void");
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getName() {
-		return GearSettings.BOW_VOID_NAME;
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getDescription() {
-		return GearSettings.BOW_VOID_DESC;
-	}
-
-	@Nonnull
-	@Override
-	public GearGrade getGrade() {
-		return GearGrade.A;
+		super(plugin, "void", GearSettings.BOW_VOID_NAME, GearSettings.BOW_VOID_DESC, GearGrade.A);
 	}
 
 	@Override

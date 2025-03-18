@@ -1,6 +1,5 @@
 package me.colingrimes.clash.gear.bow.implementation;
 
-import me.colingrimes.midnight.message.Message;
 import me.colingrimes.clash.Clash;
 import me.colingrimes.clash.config.GearSettings;
 import me.colingrimes.clash.gear.util.GearGrade;
@@ -27,7 +26,7 @@ public class SniperBow extends BowGear {
 	private final Set<UUID> players = new HashSet<>();
 
 	public SniperBow(@Nonnull Clash plugin) {
-		super(plugin, "sniper");
+		super(plugin, "sniper", GearSettings.BOW_SNIPER_NAME, GearSettings.BOW_SNIPER_DESC, GearGrade.A);
 		this.checkSnipers();
 	}
 
@@ -41,24 +40,6 @@ public class SniperBow extends BowGear {
 				}
 			});
 		}, 10L, 10L);
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getName() {
-		return GearSettings.BOW_SNIPER_NAME;
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getDescription() {
-		return GearSettings.BOW_SNIPER_DESC;
-	}
-
-	@Nonnull
-	@Override
-	public GearGrade getGrade() {
-		return GearGrade.A;
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package me.colingrimes.clash.gear.bow.implementation;
 
-import me.colingrimes.midnight.message.Message;
 import me.colingrimes.clash.Clash;
 import me.colingrimes.clash.config.GearSettings;
 import me.colingrimes.clash.gear.util.GearGrade;
@@ -21,28 +20,10 @@ import java.util.UUID;
 // TODO - think about adding cases for leaves/water/snow/ice/packedice/set fire on all blocks
 public class EmberBow extends BowGear {
 
-	private final Material[] materials = { Material.FIRE_CORAL, Material.FIRE_CORAL_FAN, Material.NETHER_WART };
+	private final Material[] materials = { Material.BLAZE_POWDER, Material.FIRE_CORAL, Material.FIRE_CORAL_FAN, Material.NETHER_WART };
 
 	public EmberBow(@Nonnull Clash plugin) {
-		super(plugin, "ember");
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getName() {
-		return GearSettings.BOW_EMBER_NAME;
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getDescription() {
-		return GearSettings.BOW_EMBER_DESC;
-	}
-
-	@Nonnull
-	@Override
-	public GearGrade getGrade() {
-		return GearGrade.B;
+		super(plugin, "ember", GearSettings.BOW_EMBER_NAME, GearSettings.BOW_EMBER_DESC, GearGrade.A);
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package me.colingrimes.clash.gear.bow.implementation;
 
-import me.colingrimes.midnight.message.Message;
 import me.colingrimes.clash.Clash;
 import me.colingrimes.clash.config.GearSettings;
 import me.colingrimes.clash.gear.util.GearGrade;
@@ -23,26 +22,8 @@ public class RicochetBow extends BowGear implements Listener {
 	private final Map<Arrow, Integer> arrows = new HashMap<>();
 
 	public RicochetBow(@Nonnull Clash plugin) {
-		super(plugin, "ricochet");
+		super(plugin, "ricochet", GearSettings.BOW_RICOCHET_NAME, GearSettings.BOW_RICOCHET_DESC, GearGrade.F);
 		Common.register(plugin, this);
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getName() {
-		return GearSettings.BOW_RICOCHET_NAME;
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getDescription() {
-		return GearSettings.BOW_RICOCHET_DESC;
-	}
-
-	@Nonnull
-	@Override
-	public GearGrade getGrade() {
-		return GearGrade.F;
 	}
 
 	@Override

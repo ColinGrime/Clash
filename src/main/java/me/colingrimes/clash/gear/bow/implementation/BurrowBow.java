@@ -1,6 +1,5 @@
 package me.colingrimes.clash.gear.bow.implementation;
 
-import me.colingrimes.midnight.message.Message;
 import me.colingrimes.midnight.util.Common;
 import me.colingrimes.clash.Clash;
 import me.colingrimes.clash.config.GearSettings;
@@ -23,26 +22,8 @@ public class BurrowBow extends BowGear implements Listener {
 	private final Map<Arrow, Integer> arrows = new HashMap<>();
 
 	public BurrowBow(@Nonnull Clash plugin) {
-		super(plugin, "burrow");
+		super(plugin, "burrow", GearSettings.BOW_BURROW_NAME, GearSettings.BOW_BURROW_DESC, GearGrade.C);
 		Common.register(plugin, this);
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getName() {
-		return GearSettings.BOW_BURROW_NAME;
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getDescription() {
-		return GearSettings.BOW_BURROW_DESC;
-	}
-
-	@Nonnull
-	@Override
-	public GearGrade getGrade() {
-		return GearGrade.C;
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package me.colingrimes.clash.gear.bow.implementation;
 
-import me.colingrimes.midnight.message.Message;
 import me.colingrimes.clash.Clash;
 import me.colingrimes.clash.config.GearSettings;
 import me.colingrimes.clash.gear.util.GearGrade;
@@ -21,25 +20,7 @@ import java.util.List;
 public class TrapBow extends BowGear {
 
 	public TrapBow(@Nonnull Clash plugin) {
-		super(plugin, "trap");
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getName() {
-		return GearSettings.BOW_TRAP_NAME;
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getDescription() {
-		return GearSettings.BOW_TRAP_DESC;
-	}
-
-	@Nonnull
-	@Override
-	public GearGrade getGrade() {
-		return GearGrade.A;
+		super(plugin, "trap", GearSettings.BOW_TRAP_NAME, GearSettings.BOW_TRAP_DESC, GearGrade.A);
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package me.colingrimes.clash.gear.bow.implementation;
 
-import me.colingrimes.midnight.message.Message;
 import me.colingrimes.clash.Clash;
 import me.colingrimes.clash.config.GearSettings;
 import me.colingrimes.clash.gear.util.GearGrade;
@@ -24,26 +23,8 @@ public class GrappleBow extends BowGear implements Listener {
 	private final Cooldown<UUID> noFallDamage = Cooldown.create(Duration.ofSeconds(5));
 
 	public GrappleBow(@Nonnull Clash plugin) {
-		super(plugin, "grapple");
+		super(plugin, "grapple", GearSettings.BOW_GRAPPLE_NAME, GearSettings.BOW_GRAPPLE_DESC, GearGrade.B);
 		Common.register(plugin, this);
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getName() {
-		return GearSettings.BOW_GRAPPLE_NAME;
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getDescription() {
-		return GearSettings.BOW_GRAPPLE_DESC;
-	}
-
-	@Nonnull
-	@Override
-	public GearGrade getGrade() {
-		return GearGrade.B;
 	}
 
 	@Override

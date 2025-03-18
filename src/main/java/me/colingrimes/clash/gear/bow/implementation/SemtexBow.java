@@ -1,6 +1,5 @@
 package me.colingrimes.clash.gear.bow.implementation;
 
-import me.colingrimes.midnight.message.Message;
 import me.colingrimes.clash.Clash;
 import me.colingrimes.clash.config.GearSettings;
 import me.colingrimes.clash.gear.util.GearGrade;
@@ -11,25 +10,7 @@ import javax.annotation.Nonnull;
 public class SemtexBow extends BowGear {
 
 	public SemtexBow(@Nonnull Clash plugin) {
-		super(plugin, "semtex");
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getName() {
-		return GearSettings.BOW_SEMTEX_NAME;
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getDescription() {
-		return GearSettings.BOW_SEMTEX_DESC;
-	}
-
-	@Nonnull
-	@Override
-	public GearGrade getGrade() {
-		return GearGrade.B;
+		super(plugin, "semtex", GearSettings.BOW_SEMTEX_NAME, GearSettings.BOW_SEMTEX_DESC, GearGrade.B);
 	}
 
 	@Override

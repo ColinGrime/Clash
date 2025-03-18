@@ -1,5 +1,7 @@
 package me.colingrimes.clash.gear.bow;
 
+import me.colingrimes.clash.gear.util.GearGrade;
+import me.colingrimes.midnight.message.Message;
 import me.colingrimes.midnight.util.Common;
 import me.colingrimes.midnight.util.text.Text;
 import me.colingrimes.clash.Clash;
@@ -21,8 +23,8 @@ import java.util.List;
 
 public abstract class BowGear extends BaseGear {
 
-	public BowGear(@Nonnull Clash plugin, @Nonnull String id) {
-		super(plugin, id);
+	public BowGear(@Nonnull Clash plugin, @Nonnull String id, @Nonnull Message<?> name, @Nonnull Message<?> description, @Nonnull GearGrade grade) {
+		super(plugin, id, name, description, grade);
 	}
 
 	/**
@@ -34,7 +36,7 @@ public abstract class BowGear extends BaseGear {
 
 	@Nonnull
 	public ItemStack getGear() {
-		String name = getGrade().getColor() + getName().toText() + " &7(" + getGrade().getName() + "&7)";
+		String name = getName() + " &7(" + grade.getName() + "&7)";
 
 		// Add cooldown to name if applicable.
 		if (getCooldown() > 0) {
@@ -44,7 +46,7 @@ public abstract class BowGear extends BaseGear {
 
 		return Items.of(Material.BOW)
 				.name(name)
-				.lore(List.of("&7" + getDescription().toText()))
+				.lore(List.of(getDescription()))
 				.hide()
 				.glow()
 				.unbreakable()
@@ -62,7 +64,7 @@ public abstract class BowGear extends BaseGear {
 		// Bow gear is on cooldown.
 		if (cooldown.onCooldown(bow.shooter())) {
 			if (!(event instanceof PlayerInteractEvent)) {
-				bow.shooter().sendMessage(Text.color("&7Your " + getGrade().getColor() + getName().toText() + " &7gear is currently on cooldown!"));
+				bow.shooter().sendMessage(Text.color("&7Your " + getName() + " &7gear is currently on cooldown!"));
 			}
 			bow.removeArrow();
 			return false;

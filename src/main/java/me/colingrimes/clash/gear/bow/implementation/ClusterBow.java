@@ -1,6 +1,5 @@
 package me.colingrimes.clash.gear.bow.implementation;
 
-import me.colingrimes.midnight.message.Message;
 import me.colingrimes.midnight.util.misc.Random;
 import me.colingrimes.clash.Clash;
 import me.colingrimes.clash.config.GearSettings;
@@ -15,25 +14,7 @@ import javax.annotation.Nonnull;
 public class ClusterBow extends BowGear {
 
 	public ClusterBow(@Nonnull Clash plugin) {
-		super(plugin, "cluster");
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getName() {
-		return GearSettings.BOW_CLUSTER_NAME;
-	}
-
-	@Nonnull
-	@Override
-	public Message<?> getDescription() {
-		return GearSettings.BOW_CLUSTER_DESC;
-	}
-
-	@Nonnull
-	@Override
-	public GearGrade getGrade() {
-		return GearGrade.F;
+		super(plugin, "cluster", GearSettings.BOW_CLUSTER_NAME, GearSettings.BOW_CLUSTER_DESC, GearGrade.F);
 	}
 
 	@Override

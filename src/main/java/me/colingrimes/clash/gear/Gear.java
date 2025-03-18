@@ -1,6 +1,5 @@
 package me.colingrimes.clash.gear;
 
-import me.colingrimes.midnight.message.Message;
 import me.colingrimes.clash.gear.util.GearGrade;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Event;
@@ -25,7 +24,7 @@ public interface Gear {
 	 * @return the gear's name
 	 */
 	@Nonnull
-	Message<?> getName();
+	String getName();
 
 	/**
 	 * Gets the colored description of the custom gear.
@@ -33,7 +32,7 @@ public interface Gear {
 	 * @return the gear's description
 	 */
 	@Nonnull
-	Message<?> getDescription();
+	String getDescription();
 
 	/**
 	 * Gets the gear's grade.

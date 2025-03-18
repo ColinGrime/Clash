@@ -56,7 +56,7 @@ public class GearListeners implements Listener {
 		int timeLeftTicks = (int) (gear.getTimeLeft(player).toMillis() / 50.0);
 		int cooldownTicks = (int) (gear.getCooldown() * 20);
 
-		BossBar bossBar = Display.bossBar(gear.getGrade().getColor() + gear.getName().toText() + " Cooldown");
+		BossBar bossBar = Display.bossBar(gear.getName() + " Cooldown");
 		bossBar.setId("gear");
 		bossBar.setColor(gear.getGrade().getBarColor());
 		bossBar.animateProgress(timeLeftTicks, (double) (cooldownTicks - timeLeftTicks) / cooldownTicks);
