@@ -2,6 +2,7 @@ package me.colingrimes.clash;
 
 import me.colingrimes.clash.gear.bow.listener.BowListeners;
 import me.colingrimes.clash.gear.bow.BowGear;
+import me.colingrimes.clash.gear.listener.GearListeners;
 import me.colingrimes.midnight.Midnight;
 import me.colingrimes.midnight.util.bukkit.NBT;
 import me.colingrimes.midnight.util.io.Introspector;
@@ -26,6 +27,7 @@ public class Clash extends Midnight {
 
 	@Override
 	protected void registerListeners(@Nonnull List<Listener> listeners) {
+		listeners.add(new GearListeners(this));
 		listeners.add(new BowListeners(this));
 	}
 
