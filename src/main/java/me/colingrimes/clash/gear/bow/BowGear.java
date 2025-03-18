@@ -64,7 +64,7 @@ public abstract class BowGear extends BaseGear {
 		// Bow gear is on cooldown.
 		if (cooldown.onCooldown(bow.shooter())) {
 			if (!(event instanceof PlayerInteractEvent)) {
-				bow.shooter().sendMessage(Text.color("&7Your " + getName() + " &7gear is currently on cooldown!"));
+				bow.shooter().sendMessage(Text.color("&7The " + getName() + " &7gear is currently on cooldown."));
 			}
 			bow.removeArrow();
 			return false;

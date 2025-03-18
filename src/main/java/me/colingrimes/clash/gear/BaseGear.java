@@ -16,7 +16,10 @@ import java.time.Duration;
 
 public abstract class BaseGear implements Gear, Listener {
 
-	protected final Cooldown<LivingEntity> cooldown = Cooldown.create(Duration.ofMillis((long) (getCooldown() * 1000)));
+	protected final Cooldown<LivingEntity> cooldown = Cooldown.create(
+			Duration.ofMillis((long) (getCooldown() * 1000)),
+			(e -> e.sendMessage(Text.color("&7Cooldown period ended for the " + getName() + " &7gear.")))
+	);
 	protected final Clash plugin;
 	protected final String id;
 	private final Message<?> name;
