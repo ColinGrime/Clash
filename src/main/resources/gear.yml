@@ -29,7 +29,7 @@ bows:
     desc: "Fire an arrow -> Left Click to explode!"
   displace:
     name: "Displace"
-    desc: "Arrows swap positions with &oany &rentity on hit."
+    desc: "Swap positions with entities on hit."
   disruptor:
     name: "Disruptor"
     desc: "Completely disable an enemy weapon."
