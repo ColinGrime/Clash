@@ -22,6 +22,7 @@ public class DisplaceBow extends BowGear {
 		Location damagedLocation = bow.damaged().getLocation();
 		bow.shooter().teleport(damagedLocation);
 		bow.damaged().teleport(shooterLocation);
+		event.setCancelled(true);
 		return true;
 	}
 }
