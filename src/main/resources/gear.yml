@@ -69,9 +69,6 @@ bows:
   point_blank:
     name: "Point Blank"
     desc: "Arrows deal significantly more damage at close range."
-  quake:
-    name: "Quake"
-    desc: "Creates a small shockwave where the arrow lands."
   rapid_fire:
     name: "Rapid Fire"
     desc: "BRRRRRRRRRRR!!"

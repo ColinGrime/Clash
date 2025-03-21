@@ -80,9 +80,6 @@ public interface GearSettings {
 	Message<?> BOW_POINT_BLANK_NAME = message("bows.point_blank.name", "Point Blank");
 	Message<?> BOW_POINT_BLANK_DESC = message("bows.point_blank.desc");
 
-	Message<?> BOW_QUAKE_NAME = message("bows.quake.name", "Quake");
-	Message<?> BOW_QUAKE_DESC = message("bows.quake.desc");
-
 	Message<?> BOW_RAPID_FIRE_NAME = message("bows.rapid_fire.name", "Rapid Fire");
 	Message<?> BOW_RAPID_FIRE_DESC = message("bows.rapid_fire.desc");
 
